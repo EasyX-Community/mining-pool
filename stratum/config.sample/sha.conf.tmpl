@@ -1,0 +1,17 @@
+[TCP]
+server = {{ .Env.SERVER_URL }}
+port = 3333
+password = {{ .Env.SERVER_PASSWORD }}
+
+[SQL]
+host = {{ .Env.DB_HOST }}
+database = {{ .Env.DB_DATABASE }}
+username = {{ .Env.DB_USERNAME }}
+password = {{ .Env.DB_PASSWORD }}
+
+[STRATUM]
+algo = sha256
+difficulty = 512
+max_ttf = 40000
+reconnect = 1
+

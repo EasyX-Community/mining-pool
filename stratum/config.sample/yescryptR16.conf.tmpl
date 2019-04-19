@@ -1,0 +1,15 @@
+[TCP]
+server = {{ .Env.SERVER_URL }}
+port = 6333
+password = {{ .Env.SERVER_PASSWORD }}
+
+[SQL]
+host = {{ .Env.DB_HOST }}
+database = {{ .Env.DB_DATABASE }}
+username = {{ .Env.DB_USERNAME }}
+password = {{ .Env.DB_PASSWORD }}
+
+[STRATUM]
+algo = yescryptR16
+difficulty = 2
+max_ttf = 400000000

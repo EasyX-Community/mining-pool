@@ -1,0 +1,13 @@
+extend type Query {
+  balances: [Balance!]! @paginate(type: "paginator" model: "App\\Models\\Balance")
+  balance(id: ID @eq): Balance @find(model: "App\\Models\\Balance")
+}
+
+type Balance {
+    id: ID!
+    name: String
+    balance: Float
+    onSell: Float @rename(attribute: "onsell")
+    createdAt: DateTime! @rename(attribute: "created_at")
+    updatedAt: DateTime! @rename(attribute: "updated_at")
+}

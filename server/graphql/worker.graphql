@@ -1,0 +1,23 @@
+extend type Query {
+  workers: [Worker!]! @paginate(type: "paginator" model: "App\\Models\\Worker")
+  worker(id: ID @eq): Worker @find(model: "App\\Models\\Worker")
+}
+
+type Worker {
+    id: ID!
+    time: Int
+    pid: Int
+    subscribe: Boolean
+    difficulty: Float
+    ip: String
+    dns: String
+    name: String
+    nonce: String @rename(attribute: "nonce1")
+    version: String
+    password: String
+    worker: String
+    algorithm: Algorithm
+    user: User @belongsTo
+    createdAt: DateTime! @rename(attribute: "created_at")
+    updatedAt: DateTime! @rename(attribute: "updated_at")
+}

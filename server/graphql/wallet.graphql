@@ -1,0 +1,13 @@
+extend type Query {
+  wallets: [Wallet!]! @paginate(type: "paginator" model: "App\\Models\\Wallet")
+  wallet(id: ID @eq): Wallet @find(model: "App\\Models\\Wallet")
+}
+
+type Wallet {
+    id: ID!
+    name: String
+    coin: Coin @belongsTo
+    user: User @belongsTo
+    createdAt: DateTime! @rename(attribute: "created_at")
+    updatedAt: DateTime! @rename(attribute: "updated_at")
+}

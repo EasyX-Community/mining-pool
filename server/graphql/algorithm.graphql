@@ -1,0 +1,16 @@
+extend type Query {
+  algorithms: [Algorithm!]! @paginate(type: "paginator" model: "App\\Models\\Algo")
+  algorithm(id: ID @eq): Algorithm @find(model: "App\\Models\\Algo")
+}
+
+type Algorithm {
+    id: ID!
+    name: String
+    profit: Float
+    rent: Float
+    factor: Float
+    overflow: Boolean
+    workers: [Worker!]! @hasMany(type: "connection")
+    createdAt: DateTime! @rename(attribute: "created_at")
+    updatedAt: DateTime! @rename(attribute: "updated_at")
+}

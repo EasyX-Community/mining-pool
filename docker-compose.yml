@@ -1,0 +1,69 @@
+version: '2.3'
+
+services:
+
+  server:
+    image: helixalpha/server:latest
+    env_file: .env
+    volumes:
+      - ./server:/var/www/html:delegated
+      - ./.docker/.cache:/var/www/.cache:delegated
+    networks:
+      default:
+        aliases:
+         - server.darkmatter.internal
+
+  web:
+    image: helixalpha/app:latest
+    env_file: .env
+    ports:
+      - '80:80'
+    volumes:
+      - ./server/storage/app/public:/var/www/storage:delegated
+      - ./server/public:/var/www/html:delegated
+    networks:
+      default:
+        aliases:
+         - darkmatter.internal
+
+  # stratum:
+  #   image: helixalpha/stratum:latest
+  #   env_file: .env
+  #   volumes:
+  #     - $PWD/stratum/docker-entrypoint.sh:/usr/local/bin/docker-entrypoint.sh
+  #     - $PWD/stratum/config/run.sh:/var/stratum/config/run.sh
+  #     - $PWD/stratum/run.sh:/var/stratum/run.sh
+  #   networks:
+  #     default:
+  #       aliases:
+  #        - stratum.darkmatter.internal
+
+  database:
+    image: mysql:8.0.15
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: darkmatter
+    networks:
+      default:
+        aliases:
+         - database.darkmatter.internal
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      default:
+        aliases:
+        - adminer.darkmatter.internal
+networks:
+  default:
+    external:
+      name: mining-pool

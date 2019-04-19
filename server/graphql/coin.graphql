@@ -1,0 +1,261 @@
+
+
+#  * @property MarketHistory[] $marketHistories
+#  * @property Notification[] $notifications
+
+extend type Query {
+  coins: [Coin!]! @paginate(type: "paginator" model: "App\\Models\\Coin")
+  coin(id: ID @eq): Coin @find(model: "App\\Models\\Coin")
+}
+
+extend type Mutation {
+  createCoin(
+    account: String,
+    action: Int,
+    actualTTF: Int,
+    algo: String,
+    autoReady: Boolean,
+    auxpow: Boolean,
+    available: Float,
+    balance: Float,
+    blockExplorer: String,
+    blockHeight: Int,
+    blockTime: Int,
+    charityAddress: String,
+    charityAmount: Float,
+    charityPercent: Float,
+    cleared: Float,
+    confFolder: String,
+    connections: Int,
+    depositAddress: String,
+    depositMinimum: Float,
+    difficulty: Float,
+    difficultyPos: Float,
+    dontSell: Boolean,
+    enable: Boolean,
+    errors: String,
+    hasGetInfo: Boolean,
+    hasMasterNodes: Boolean,
+    hasSubmitBlock: Boolean,
+    image: String,
+    immature: Float,
+    indexAvgerage: Float,
+    installed: Boolean,
+    lastNetworkFound: Int,
+    lastBlock: String,
+    linkBitcointalk: String,
+    linkExchange: String,
+    linkExplorer: String,
+    linkGithub: String,
+    linkSite: String,
+    market: String,
+    masterWallet: String,
+    matureBlocks: Int,
+    maxMiners: Int,
+    maxShares: Int,
+    mint: Float,
+    multiAlgorithms: Boolean,
+    networkHash: Float,
+    networkTTF: Int,
+    noExplorer: Boolean,
+    payoutMax: Float,
+    payoutMin: Float,
+    poolTTF: Int,
+    powendHeight: Int,
+    price: Float,
+    price2: Float,
+    program: String,
+    reward: Float,
+    rewardMul: Float,
+    rpcCert: String,
+    rpcCurl: Boolean,
+    rpcEncoding: String,
+    rpcHost: String,
+    rpcPassword: String,
+    rpcPort: Int,
+    rpcSSL: Boolean,
+    rpcUser: String,
+    sellOnBid: Boolean,
+    serverUser: String,
+    specifications: String,
+    stake: Float,
+    symbol: String,!
+    symbol2: String,
+    targetHeight: Int,
+    transactionFee: Float,
+    transactionMessage: Float,
+    useMemoryPool: Boolean,
+    usesegwit: Boolean,
+    version: String,
+    visible: Boolean,
+    watch: Boolean
+  ): Coin @create
+  updateCoin(    account: String,
+    action: Int,
+    actualTTF: Int,
+    algo: String,
+    autoReady: Boolean,
+    auxpow: Boolean,
+    available: Float,
+    balance: Float,
+    blockExplorer: String,
+    blockHeight: Int,
+    blockTime: Int,
+    charityAddress: String,
+    charityAmount: Float,
+    charityPercent: Float,
+    cleared: Float,
+    confFolder: String,
+    connections: Int,
+    depositAddress: String,
+    depositMinimum: Float,
+    difficulty: Float,
+    difficultyPos: Float,
+    dontSell: Boolean,
+    enable: Boolean,
+    errors: String,
+    hasGetInfo: Boolean,
+    hasMasterNodes: Boolean,
+    hasSubmitBlock: Boolean,
+    image: String,
+    immature: Float,
+    indexAvgerage: Float,
+    installed: Boolean,
+    lastNetworkFound: Int,
+    lastBlock: String,
+    linkBitcointalk: String,
+    linkExchange: String,
+    linkExplorer: String,
+    linkGithub: String,
+    linkSite: String,
+    market: String,
+    masterWallet: String,
+    matureBlocks: Int,
+    maxMiners: Int,
+    maxShares: Int,
+    mint: Float,
+    multiAlgorithms: Boolean,
+    networkHash: Float,
+    networkTTF: Int,
+    noExplorer: Boolean,
+    payoutMax: Float,
+    payoutMin: Float,
+    poolTTF: Int,
+    powendHeight: Int,
+    price: Float,
+    price2: Float,
+    program: String,
+    reward: Float,
+    rewardMul: Float,
+    rpcCert: String,
+    rpcCurl: Boolean,
+    rpcEncoding: String,
+    rpcHost: String,
+    rpcPassword: String,
+    rpcPort: Int,
+    rpcSSL: Boolean,
+    rpcUser: String,
+    sellOnBid: Boolean,
+    serverUser: String,
+    specifications: String,
+    stake: Float,
+    symbol: String,!
+    symbol2: String,
+    targetHeight: Int,
+    transactionFee: Float,
+    transactionMessage: Float,
+    useMemoryPool: Boolean,
+    usesegwit: Boolean,
+    version: String,
+    visible: Boolean,
+    watch: Boolean): Coin @update
+  deleteCoin(id: ID): Coin @delete
+}
+
+type Coin {
+    id: ID!
+    account: String
+    action: Int
+    actualTTF: Int @rename(attribute: "actual_ttf")
+    algo: String
+    autoReady: Boolean @rename(attribute: "auto_ready")
+    auxpow: Boolean @rename(attribute: "auxPOW")
+    available: Float
+    balance: Float
+    blockExplorer: String @rename(attribute: "block_explorer")
+    blockHeight: Int @rename(attribute: "block_height")
+    blockTime: Int @rename(attribute: "block_time")
+    charityAddress: String @rename(attribute: "charity_address")
+    charityAmount: Float @rename(attribute: "charity_amount")
+    charityPercent: Float @rename(attribute: "charity_percent")
+    cleared: Float
+    confFolder: String @rename(attribute: "conf_folder")
+    connections: Int
+    depositAddress: String @rename(attribute: "deposit_address")
+    depositMinimum: Float @rename(attribute: "deposit_minimum")
+    difficulty: Float
+    difficultyPos: Float @rename(attribute: "difficulty_pos")
+    dontSell: Boolean @rename(attribute: "dont_sell")
+    enable: Boolean
+    errors: String
+    hasGetInfo: Boolean @rename(attribute: "has_get_info")
+    hasMasterNodes: Boolean @rename(attribute: "has_master_nodes")
+    hasSubmitBlock: Boolean @rename(attribute: "hassubmitblock")
+    image: String
+    immature: Float
+    indexAvgerage: Float @rename(attribute: "index_avg")
+    installed: Boolean
+    lastNetworkFound: Int @rename(attribute: "last_network_found")
+    lastBlock: String @rename(attribute: "lastblock")
+    linkBitcointalk: String @rename(attribute: "link_bitcointalk")
+    linkExchange: String @rename(attribute: "link_exchange")
+    linkExplorer: String @rename(attribute: "link_explorer")
+    linkGithub: String @rename(attribute: "link_github")
+    linkSite: String @rename(attribute: "link_site")
+    market: String
+    masterWallet: String @rename(attribute: "master_wallet")
+    matureBlocks: Int @rename(attribute: "mature_blocks")
+    maxMiners: Int @rename(attribute: "max_miners")
+    maxShares: Int @rename(attribute: "max_shares")
+    mint: Float
+    multiAlgorithms: Boolean @rename(attribute: "multialgos")
+    networkHash: Float @rename(attribute: "network_hash")
+    networkTTF: Int @rename(attribute: "network_ttf")
+    noExplorer: Boolean @rename(attribute: "no_explorer")
+    payoutMax: Float @rename(attribute: "payout_max")
+    payoutMin: Float @rename(attribute: "payout_min")
+    poolTTF: Int @rename(attribute: "pool_ttf")
+    powendHeight: Int @rename(attribute: "powend_height")
+    price: Float
+    price2: Float
+    program: String
+    reward: Float
+    rewardMul: Float @rename(attribute: "reward_mul")
+    rpcCert: String @rename(attribute: "rpc_cert")
+    rpcCurl: Boolean @rename(attribute: "rpc_curl")
+    rpcEncoding: String @rename(attribute: "rpc_encoding")
+    rpcHost: String @rename(attribute: "rpc_host")
+    rpcPassword: String @rename(attribute: "rpc_password")
+    rpcPort: Int @rename(attribute: "rpc_port")
+    rpcSSL: Boolean @rename(attribute: "rpc_ssl")
+    rpcUser: String @rename(attribute: "rpc_user")
+    sellOnBid: Boolean @rename(attribute: "sell_on_bid")
+    serverUser: String @rename(attribute: "server_user")
+    specifications: String
+    stake: Float
+    symbol: String!
+    symbol2: String
+    targetHeight: Int @rename(attribute: "target_height")
+    "Coin transaction fee"
+    transactionFee: Float @rename(attribute: "tx_fee")
+    transactionMessage: Float @rename(attribute: "tx_message")
+    useMemoryPool: Boolean @rename(attribute: "use_memory_pool")
+    usesegwit: Boolean
+    version: String
+    visible: Boolean
+    watch: Boolean
+    bookmarks: Bookmark @hasMany
+    payouts: Payout @hasMany
+    createdAt: DateTime! @rename(attribute: "created_at")
+    updatedAt: DateTime! @rename(attribute: "updated_at")
+}

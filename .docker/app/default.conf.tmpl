@@ -1,0 +1,20 @@
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	set $base /var/www/html;
+	root $base;
+
+	index index.html index.htm index.php;
+
+	# index.php fallback
+	location / {
+		try_files $uri /index.php?$query_string;
+	}
+
+	# handle .php
+	location ~ \.php$ {
+		include nginxconfig.io/php_fastcgi.conf;
+	}
+
+	include nginxconfig.io/general.conf;
+}

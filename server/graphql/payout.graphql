@@ -1,0 +1,19 @@
+extend type Query {
+  payouts: [Payout!]! @paginate(type: "paginator" model: "App\\Models\\Payout")
+  payout(id: ID @eq): Payout @find(model: "App\\Models\\Payout")
+}
+
+type Payout {
+    id: ID!
+    time: Int
+    completed: Boolean
+    amount: Float
+    fee: Float
+    tx: String
+    memoid: String
+    errmsg: String
+    account: Account @belongsTo
+    coin: Coin @belongsTo
+    createdAt: DateTime! @rename(attribute: "created_at")
+    updatedAt: DateTime! @rename(attribute: "updated_at")
+}

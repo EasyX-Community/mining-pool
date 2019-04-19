@@ -1,0 +1,16 @@
+[TCP]
+server = {{ .Env.SERVER_URL }}
+port = 3833
+password = {{ .Env.SERVER_PASSWORD }}
+
+[SQL]
+host = {{ .Env.DB_HOST }}
+database = {{ .Env.DB_DATABASE }}
+username = {{ .Env.DB_USERNAME }}
+password = {{ .Env.DB_PASSWORD }}
+
+[STRATUM]
+algo = nist5
+difficulty = 0.032
+max_ttf = 4000000
+

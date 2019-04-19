@@ -1,0 +1,15 @@
+# 404
+try_files $fastcgi_script_name =404;
+
+# default fastcgi_params
+include fastcgi_params;
+
+# fastcgi settings
+fastcgi_pass			{{ default .Env.NGINX_PHP_FPM_HOST "server.darkmatter.internal" }}:{{ default .Env.NGINX_PHP_FPM_PORT "9000" }};
+fastcgi_index			index.php;
+fastcgi_buffers			8 16k;
+fastcgi_buffer_size		32k;
+
+# fastcgi params
+fastcgi_param SCRIPT_FILENAME   /var/www/html/public/index.php;
+fastcgi_param PHP_ADMIN_VALUE	"open_basedir=$base/:/usr/lib/php/:/tmp/";

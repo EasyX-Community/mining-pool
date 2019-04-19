@@ -1,0 +1,13 @@
+extend type Query {
+  users: [User!]! @paginate(type: "paginator" model: "App\\Models\\User")
+  user(id: ID @eq): User @find(model: "App\\Models\\User")
+}
+
+type User {
+    id: ID!
+    name: String
+    email: String
+    wallets: Wallet @hasMany
+    createdAt: DateTime! @rename(attribute: "created_at")
+    updatedAt: DateTime! @rename(attribute: "updated_at")
+}

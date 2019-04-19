@@ -1,0 +1,19 @@
+extend type Query {
+  hashrates: [HashRate!]! @paginate(type: "paginator" model: "App\\Models\\HashRate")
+  hashrate(id: ID @eq): HashRate @find(model: "App\\Models\\HashRate")
+}
+
+type HashRate {
+    id: ID!
+    time: Int
+    time: Int
+    hashrate: Int
+    hashrate_bad: Int
+    price: Float
+    rent: Float
+    earnings: Float
+    difficulty: Float
+    algorithm: Algorithm @belongsTo 
+    createdAt: DateTime! @rename(attribute: "created_at")
+    updatedAt: DateTime! @rename(attribute: "updated_at")
+}

@@ -1,0 +1,15 @@
+[TCP]
+server = {{ .Env.SERVER_URL }}
+port = 3557
+password = {{ .Env.SERVER_PASSWORD }}
+
+[SQL]
+host = {{ .Env.DB_HOST }}
+database = {{ .Env.DB_DATABASE }}
+username = {{ .Env.DB_USERNAME }}
+password = {{ .Env.DB_PASSWORD }}
+
+[STRATUM]
+algo = exosis
+difficulty = 0.125
+max_ttf = 50000

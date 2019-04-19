@@ -1,0 +1,16 @@
+[TCP]
+server = {{ .Env.SERVER_URL }}
+port = 4533
+password = {{ .Env.SERVER_PASSWORD }}
+
+[SQL]
+host = {{ .Env.DB_HOST }}
+database = {{ .Env.DB_DATABASE }}
+username = {{ .Env.DB_USERNAME }}
+password = {{ .Env.DB_PASSWORD }}
+
+[STRATUM]
+algo = lyra2v2
+difficulty = 1
+max_ttf = 40000
+

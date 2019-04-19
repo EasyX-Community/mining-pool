@@ -1,0 +1,15 @@
+extend type Query {
+  bookmarks: [Bookmark!]! @paginate(type: "paginator" model: "App\\Models\\Bookmark")
+  bookmark(id: ID @eq): Bookmark @find(model: "App\\Models\\Bookmark")
+}
+
+type Bookmark {
+    id: ID!
+    coin_id: Int
+    label: String
+    address: String
+    last_used: Int
+    coin: Coin @belongsTo
+    createdAt: DateTime! @rename(attribute: "created_at")
+    updatedAt: DateTime! @rename(attribute: "updated_at")
+}

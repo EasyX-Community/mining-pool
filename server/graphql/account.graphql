@@ -1,0 +1,23 @@
+extend type Query {
+  accounts: [Account!]! @paginate(type: "paginator" model: "App\\Models\\Account")
+  account(id: ID @eq): Account @find(model: "App\\Models\\Account")
+}
+
+type Account {
+    id: ID!
+    last_earning: Int
+    is_locked: Boolean
+    no_fees: Boolean
+    donation: Boolean
+    logtraffic: Boolean
+    balance: Float
+    username: String
+    coinsymbol: String
+    swap_time: Int
+    login: String
+    hostaddr: String
+    payouts: Payout @hasMany
+    coin: Coin @belongsTo
+    createdAt: DateTime! @rename(attribute: "created_at")
+    updatedAt: DateTime! @rename(attribute: "updated_at")
+}

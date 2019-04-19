@@ -1,0 +1,16 @@
+[TCP]
+server = {{ .Env.SERVER_URL }}
+port = 4333
+password = {{ .Env.SERVER_PASSWORD }}
+
+[SQL]
+host = {{ .Env.DB_HOST }}
+database = {{ .Env.DB_DATABASE }}
+username = {{ .Env.DB_USERNAME }}
+password = {{ .Env.DB_PASSWORD }}
+
+[STRATUM]
+algo = scryptn
+difficulty = 32
+max_ttf = 4000000000
+
