@@ -1,107 +1,107 @@
 import React from 'react'
-import { Table } from 'antd'
+import { Table, Pagination } from 'antd'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
-import { fromJS } from 'immutable'
 
-const columns = [{
-  title: 'Algorithm',
-  dataIndex: 'algorithm',
-  onFilter: (value, record) => record.name.indexOf(value) === 0,
-  sorter: (a, b) => a.name.length - b.name.length,
-  sortDirections: ['descend'],
-}, {
-  title: 'Port',
-  dataIndex: 'port',
-  defaultSortOrder: 'descend',
-  sorter: (a, b) => a.age - b.age,
-}, {
-  title: 'Coins',
-  dataIndex: 'coins',
-  filterMultiple: false,
-  onFilter: (value, record) => record.address.indexOf(value) === 0,
-  sorter: (a, b) => a.address.length - b.address.length,
-  sortDirections: ['descend', 'ascend'],
-},
-{
-  title: 'Miners',
-  dataIndex: 'miners',
-  sorter: (a, b) => a.address.length - b.address.length,
-  sortDirections: ['descend', 'ascend'],
-},
-{
-  title: 'Hashrate',
-  dataIndex: 'hashrate',
-  sorter: (a, b) => a.address.length - b.address.length,
-  sortDirections: ['descend', 'ascend'],
-}
-
-
-];
-
-const data = [{
-  key: '1',
-  name: 'John Brown',
-  age: 32,
-  address: 'New York No. 1 Lake Park',
-}, {
-  key: '2',
-  name: 'Jim Green',
-  age: 42,
-  address: 'London No. 1 Lake Park',
-}, {
-  key: '3',
-  name: 'Joe Black',
-  age: 32,
-  address: 'Sidney No. 1 Lake Park',
-}, {
-  key: '4',
-  name: 'Jim Red',
-  age: 32,
-  address: 'London No. 2 Lake Park',
-}];
+const columns = [
+  {
+    title: 'Algorithm',
+    dataIndex: 'name',
+    key: 'name',
+  },
+  {
+    title: 'Port',
+    dataIndex: 'port',
+    key: 'port',
+  },
+  {
+    title: 'Coins',
+    dataIndex: 'coins',
+    key: 'coins',
+  },
+  {
+    title: 'Miners',
+    dataIndex: 'miners',
+    key: 'miners',
+  },
+  {
+    title: 'Hashrate',
+    dataIndex: 'hashrates',
+    key: 'hashrates',
+  },
+]
 
 function onChange(pagination, filters, sorter) {
-  console.log('params', pagination, filters, sorter);
+  console.log('params', pagination, filters, sorter)
 }
 
 class PoolStatus extends React.Component {
-
-  transformAlgorithms = ({algorithms}) => {
-    return algorithms.data.reduce((carry, algorithm, index) => {
-      console.log(algorithm, index)
-      carry[index].key = index
+  transformAlgorithms = data => {
+    return data.algorithms.data.reduce((carry, algorithm, index) => {
+      carry.push({
+        key: index,
+        name: algorithm.name,
+        hashrates: algorithm.averageHashRate + 'h/s',
+        coins: algorithm.coinCount,
+        port: algorithm.port,
+      })
       return carry
     }, [])
-    return []
   }
 
   render() {
     return (
-      <Query query={gql`
+      <Query
+        query={gql`
           {
-            algorithms(count: 10){
-              data{
+            algorithms(count: 10) {
+              data {
                 name
-                rent
-                averageHashRate1h
-                averageHashRate30d
-                averageHashRate24h
+                coinCount
+                averageHashRate
+                port
+              }
+              paginatorInfo {
+                currentPage
+                count
+                hasMorePages
+                lastItem
+                lastPage
+                perPage
+                total
               }
             }
           }
-      `}>
+        `}
+      >
         {({ data, loading }) => {
-          const algorithms = !loading && this.transformAlgorithms(data)
-          return(
-          <div>
-            <Table columns={columns} onChange={onChange} dataSource={algorithms} loading={loading} pagination={false}/>
-          </div>)
+          const paginatorInfo = !loading && data.algorithms.paginatorInfo
+          const algorithms = !loading ? this.transformAlgorithms(data) : []
+          console.log(paginatorInfo)
+          return (
+            <div>
+              <Table
+                columns={columns}
+                onChange={onChange}
+                dataSource={algorithms}
+                loading={loading}
+                pagination={false}
+                pagination={{
+                  onChange: () => {
+                    console.log('test')
+                  },
+                  total: paginatorInfo.total,
+                  defaultPageSize: 10,
+                  showSizeChanger: true,
+                  pageSizeOptions: ['10', '20', '30'],
+                }}
+              />
+            </div>
+          )
         }}
       </Query>
     )
   }
 }
-
 
 export default PoolStatus

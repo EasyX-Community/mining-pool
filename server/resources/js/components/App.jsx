@@ -12,9 +12,9 @@ const client = new ApolloClient({
 export default class App extends Component {
   render() {
     return (
-        <ApolloProvider client={client}>
-          <Layout />
-        </ApolloProvider>
+      <ApolloProvider client={client}>
+        <Layout />
+      </ApolloProvider>
     )
   }
 }

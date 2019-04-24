@@ -22,20 +22,28 @@ class LayoutBase extends Component {
   render() {
     return (
       <BrowserRouter>
-      <Layout style={{ minHeight: '100vh' }}>
-        <Sider collapsed={this.state.collapsed} onCollapse={this.onCollapse} />
-        <Layout>
-          <Header style={{ background: '#fff', padding: 0, boxShadow:" 0 1px 4px rgba(0,21,41,.08)" }} />
+        <Layout style={{ minHeight: '100vh' }}>
+          <Sider
+            collapsed={this.state.collapsed}
+            onCollapse={this.onCollapse}
+          />
+          <Layout>
+            <Header
+              style={{
+                background: '#fff',
+                padding: 0,
+                boxShadow: ' 0 1px 4px rgba(0,21,41,.08)',
+              }}
+            />
             <Content style={{ margin: '0 16px' }}>
               <Routes />
             </Content>
-          <Footer style={{ textAlign: 'center' }}>
-            DarkMatter Mining Pool &copy;2019; Created by HelixAlpha, Inc.
-          </Footer>
+            <Footer style={{ textAlign: 'center' }}>
+              DarkMatter Mining Pool &copy;2019; Created by HelixAlpha, Inc.
+            </Footer>
+          </Layout>
         </Layout>
-      </Layout>
       </BrowserRouter>
-
     )
   }
 }

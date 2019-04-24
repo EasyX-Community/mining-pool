@@ -18,9 +18,13 @@ type Algorithm {
     "Gets the name of the algorithm"
     name: String
     profit: Float
+    "Gets the algorithm's port."
+    port: Int
     rent: Float
     factor: Float
     overflow: Boolean
+    coinCount: Int
+    coins: Coin @hasMany(type: "connection")
     hashRates: [HashRate] @hasMany(type: "connection")
     workers: [Worker!]! @hasMany(type: "connection")
     createdAt: DateTime! @rename(attribute: "created_at")

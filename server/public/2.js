@@ -16,14 +16,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! graphql-tag */ "./node_modules/graphql-tag/src/index.js");
 /* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var react_apollo__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-apollo */ "./node_modules/react-apollo/react-apollo.esm.js");
-/* harmony import */ var immutable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! immutable */ "./node_modules/immutable/dist/immutable.es.js");
 
 
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n          {\n            algorithms(count: 10){\n              data{\n                name\n                rent\n                averageHashRate1h\n                averageHashRate30d\n                averageHashRate24h\n              }\n            }\n          }\n      "]);
+  var data = _taggedTemplateLiteral(["\n          {\n            algorithms(count: 10) {\n              data {\n                name\n                coinCount\n                averageHashRate\n                port\n              }\n              paginatorInfo {\n                currentPage\n                count\n                hasMorePages\n                lastItem\n                lastPage\n                perPage\n                total\n              }\n            }\n          }\n      "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -55,70 +54,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
 var columns = [{
   title: 'Algorithm',
-  dataIndex: 'algorithm',
-  onFilter: function onFilter(value, record) {
-    return record.name.indexOf(value) === 0;
-  },
-  sorter: function sorter(a, b) {
-    return a.name.length - b.name.length;
-  },
-  sortDirections: ['descend']
+  dataIndex: 'name',
+  key: 'name'
 }, {
   title: 'Port',
   dataIndex: 'port',
-  defaultSortOrder: 'descend',
-  sorter: function sorter(a, b) {
-    return a.age - b.age;
-  }
+  key: 'port'
 }, {
   title: 'Coins',
   dataIndex: 'coins',
-  filterMultiple: false,
-  onFilter: function onFilter(value, record) {
-    return record.address.indexOf(value) === 0;
-  },
-  sorter: function sorter(a, b) {
-    return a.address.length - b.address.length;
-  },
-  sortDirections: ['descend', 'ascend']
+  key: 'coins'
 }, {
   title: 'Miners',
   dataIndex: 'miners',
-  sorter: function sorter(a, b) {
-    return a.address.length - b.address.length;
-  },
-  sortDirections: ['descend', 'ascend']
+  key: 'miners'
 }, {
   title: 'Hashrate',
-  dataIndex: 'hashrate',
-  sorter: function sorter(a, b) {
-    return a.address.length - b.address.length;
-  },
-  sortDirections: ['descend', 'ascend']
-}];
-var data = [{
-  key: '1',
-  name: 'John Brown',
-  age: 32,
-  address: 'New York No. 1 Lake Park'
-}, {
-  key: '2',
-  name: 'Jim Green',
-  age: 42,
-  address: 'London No. 1 Lake Park'
-}, {
-  key: '3',
-  name: 'Joe Black',
-  age: 32,
-  address: 'Sidney No. 1 Lake Park'
-}, {
-  key: '4',
-  name: 'Jim Red',
-  age: 32,
-  address: 'London No. 2 Lake Park'
+  dataIndex: 'hashrates',
+  key: 'hashrates'
 }];
 
 function onChange(pagination, filters, sorter) {
@@ -143,14 +98,17 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(PoolStatus)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
-    _defineProperty(_assertThisInitialized(_this), "transformAlgorithms", function (_ref) {
-      var algorithms = _ref.algorithms;
-      return algorithms.data.reduce(function (carry, algorithm, index) {
-        console.log(algorithm, index);
-        carry[index].key = index;
+    _defineProperty(_assertThisInitialized(_this), "transformAlgorithms", function (data) {
+      return data.algorithms.data.reduce(function (carry, algorithm, index) {
+        carry.push({
+          key: index,
+          name: algorithm.name,
+          hashrates: algorithm.averageHashRate + 'h/s',
+          coins: algorithm.coinCount,
+          port: algorithm.port
+        });
         return carry;
       }, []);
-      return [];
     });
 
     return _this;
@@ -163,19 +121,27 @@ function (_React$Component) {
 
       return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_apollo__WEBPACK_IMPORTED_MODULE_4__["Query"], {
         query: graphql_tag__WEBPACK_IMPORTED_MODULE_3___default()(_templateObject())
-      }, function (_ref2) {
-        var data = _ref2.data,
-            loading = _ref2.loading;
-
-        var algorithms = !loading && _this2.transformAlgorithms(data);
-
-        return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(antd_es_table__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      }, function (_ref) {
+        var data = _ref.data,
+            loading = _ref.loading;
+        var paginatorInfo = !loading && data.algorithms.paginatorInfo;
+        var algorithms = !loading ? _this2.transformAlgorithms(data) : [];
+        console.log(paginatorInfo);
+        return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(antd_es_table__WEBPACK_IMPORTED_MODULE_1__["default"], _defineProperty({
           columns: columns,
           onChange: onChange,
           dataSource: algorithms,
           loading: loading,
           pagination: false
-        }));
+        }, "pagination", {
+          onChange: function onChange() {
+            console.log('test');
+          },
+          total: paginatorInfo.total,
+          defaultPageSize: 10,
+          showSizeChanger: true,
+          pageSizeOptions: ['10', '20', '30']
+        })));
       });
     }
   }]);

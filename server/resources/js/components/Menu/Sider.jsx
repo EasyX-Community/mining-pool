@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
 import { Layout, Menu, Breadcrumb, Icon } from 'antd'
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom'
 
 const Logo = styled.div`
   height: 32px;
@@ -12,9 +12,14 @@ const { Sider } = Layout
 const SubMenu = Menu.SubMenu
 
 export default ({ collapsed, onCollapse }) => (
-  <Sider collapsible collapsed={collapsed} onCollapse={onCollapse} style={{
-    boxShadow: "2px 0 6px rgba(0,21,41,.35)"
-}}>
+  <Sider
+    collapsible
+    collapsed={collapsed}
+    onCollapse={onCollapse}
+    style={{
+      boxShadow: '2px 0 6px rgba(0,21,41,.35)',
+    }}
+  >
     <Logo />
     <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
       <Menu.Item key="1">

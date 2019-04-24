@@ -153,4 +153,16 @@ class Coin extends Model
     {
         return $query->where('visible', 1);
     }
+
+   /**
+     * Scope a query to only include coins of a given algorithm type.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  mixed  $type
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfAlgorithm($query, $type)
+    {
+        return $query->where('algo', $type);
+    }
 }
