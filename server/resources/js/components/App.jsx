@@ -6,7 +6,7 @@ import Layout from './Layout'
 import 'antd/dist/antd.css'
 
 const client = new ApolloClient({
-  uri: '127.0.0.1',
+  uri: 'graphql',
 })
 
 export default class App extends Component {

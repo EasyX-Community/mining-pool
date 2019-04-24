@@ -16,7 +16,7 @@ class CreateSharesTable extends Migration {
 		{
 			$table->bigInteger('id', true);
 			$table->integer('user_id')->nullable()->index('user1');
-			$table->integer('workerid')->nullable()->index('worker1');
+			$table->integer('worker_id')->nullable()->index('worker1');
 			$table->integer('coin_id')->nullable()->index('coin1');
 			$table->integer('jobid')->nullable()->index('jobid');
 			$table->integer('pid')->nullable();

@@ -50,7 +50,7 @@ public:
 	bool reconnecting;
 
 	int user_id;
-	int workerid;
+	int worker_id;
 	int coin_id;
 	bool logtraffic;
 

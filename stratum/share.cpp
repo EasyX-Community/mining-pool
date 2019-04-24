@@ -17,7 +17,7 @@ static YAAMP_WORKER *share_find_worker(YAAMP_CLIENT *client, YAAMP_JOB *job, boo
 		if(worker->deleted) continue;
 
 		if(	worker->user_id == client->user_id &&
-			worker->workerid == client->workerid &&
+			worker->worker_id == client->worker_id &&
 			worker->valid == valid)
 		{
 			if(!job && !worker->coin_id && !worker->remoteid)
@@ -47,7 +47,7 @@ static void share_add_worker(YAAMP_CLIENT *client, YAAMP_JOB *job, bool valid, c
 		memset(worker, 0, sizeof(YAAMP_WORKER));
 
 		worker->user_id = client->user_id;
-		worker->workerid = client->workerid;
+		worker->worker_id = client->worker_id;
 		worker->coin_id = job? (job->coind? job->coind->id: 0): 0;
 		worker->remoteid = job? (job->remote? job->remote->id: 0): 0;
 		worker->valid = valid;
@@ -120,7 +120,7 @@ void share_write(YAAMP_DB *db)
 	int count = 0;
 	int now = time(NULL);
 
-	char buffer[1024*1024] = "insert into shares (user_id, workerid, coin_id, jobid, pid, valid, extranonce1, difficulty, share_diff, time, algo, error) values ";
+	char buffer[1024*1024] = "insert into shares (user_id, worker_id, coin_id, jobid, pid, valid, extranonce1, difficulty, share_diff, time, algo, error) values ";
 	g_list_worker.Enter();
 
 	for(CLI li = g_list_worker.first; li; li = li->next)
@@ -128,14 +128,14 @@ void share_write(YAAMP_DB *db)
 		YAAMP_WORKER *worker = (YAAMP_WORKER *)li->data;
 		if(worker->deleted) continue;
 
-		if(!worker->workerid) {
+		if(!worker->worker_id) {
 			object_delete(worker);
 			continue;
 		}
 
 		if(count) strcat(buffer, ",");
 		sprintf(buffer+strlen(buffer), "(%d, %d, %d, %d, %d, %d, %d, %f, %f, %d, '%s', %d)",
-			worker->user_id, worker->workerid, worker->coin_id, worker->remoteid, pid,
+			worker->user_id, worker->worker_id, worker->coin_id, worker->remoteid, pid,
 			worker->valid, worker->extranonce1, worker->difficulty, worker->share_diff, now, g_stratum_algo, worker->error_number);
 
 		// todo: link max_ttf ?
@@ -147,7 +147,7 @@ void share_write(YAAMP_DB *db)
 		{
 			db_query(db, buffer);
 
-			strcpy(buffer, "insert into shares (user_id, workerid, coin_id, jobid, pid, valid, extranonce1, difficulty, share_diff, time, algo, error) values ");
+			strcpy(buffer, "insert into shares (user_id, worker_id, coin_id, jobid, pid, valid, extranonce1, difficulty, share_diff, time, algo, error) values ");
 			count = 0;
 		}
 
@@ -180,7 +180,7 @@ void share_prune(YAAMP_DB *db)
 void block_prune(YAAMP_DB *db)
 {
 	int count = 0;
-	char buffer[128*1024] = "insert into blocks (height, blockhash, coin_id, user_id, workerid, category, difficulty, difficulty_user, time, algo, segwit) values ";
+	char buffer[128*1024] = "insert into blocks (height, blockhash, coin_id, user_id, worker_id, category, difficulty, difficulty_user, time, algo, segwit) values ";
 
 	g_list_block.Enter();
 	for(CLI li = g_list_block.first; li; li = li->next)
@@ -200,7 +200,7 @@ void block_prune(YAAMP_DB *db)
 
 		if(count) strcat(buffer, ",");
 		sprintf(buffer+strlen(buffer), "(%d, '%s', %d, %d, %d, 'new', %f, %f, %d, '%s', %d)",
-			block->height, block->hash, block->coin_id, block->user_id, block->workerid,
+			block->height, block->hash, block->coin_id, block->user_id, block->worker_id,
 			block->difficulty, block->difficulty_user, (int)block->created, g_stratum_algo, block->segwit?1:0);
 
 		object_delete(block);
@@ -211,14 +211,14 @@ void block_prune(YAAMP_DB *db)
 	if(count) db_query(db, buffer);
 }
 
-void block_add(int user_id, int workerid, int coin_id, int height, double diff, double diff_user, const char *h1, const char *h2, int segwit)
+void block_add(int user_id, int worker_id, int coin_id, int height, double diff, double diff_user, const char *h1, const char *h2, int segwit)
 {
 	YAAMP_BLOCK *block = new YAAMP_BLOCK;
 	memset(block, 0, sizeof(YAAMP_BLOCK));
 
 	block->created = time(NULL);
 	block->user_id = user_id;
-	block->workerid = workerid;
+	block->worker_id = worker_id;
 	block->coin_id = coin_id;
 	block->height = height;
 	block->difficulty = diff;

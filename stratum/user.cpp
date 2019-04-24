@@ -129,11 +129,11 @@ void db_add_user(YAAMP_DB *db, YAAMP_CLIENT *client)
 
 void db_clear_worker(YAAMP_DB *db, YAAMP_CLIENT *client)
 {
-	if(!client->workerid)
+	if(!client->worker_id)
 		return;
 
-	db_query(db, "DELETE FROM workers WHERE id=%d", client->workerid);
-	client->workerid = 0;
+	db_query(db, "DELETE FROM workers WHERE id=%d", client->worker_id);
+	client->worker_id = 0;
 }
 
 void db_add_worker(YAAMP_DB *db, YAAMP_CLIENT *client)
@@ -167,7 +167,7 @@ void db_add_worker(YAAMP_DB *db, YAAMP_CLIENT *client)
 		client->user_id, client->sock->ip, client->username, client->difficulty_actual,
 		version, password, worker, g_stratum_algo, now, getpid());
 
-	client->workerid = (int)mysql_insert_id(&db->mysql);
+	client->worker_id = (int)mysql_insert_id(&db->mysql);
 }
 
 void db_update_workers(YAAMP_DB *db)
@@ -177,7 +177,7 @@ void db_update_workers(YAAMP_DB *db)
 	{
 		YAAMP_CLIENT *client = (YAAMP_CLIENT *)li->data;
 		if(client->deleted) continue;
-		if(!client->workerid) continue;
+		if(!client->worker_id) continue;
 
 		if(client->speed < 0.00001)
 		{
@@ -192,7 +192,7 @@ void db_update_workers(YAAMP_DB *db)
 		if(client->difficulty_written == client->difficulty_actual) continue;
 
 		db_query(db, "UPDATE workers SET difficulty=%f, subscribe=%d WHERE id=%d",
-			client->difficulty_actual, client->extranonce_subscribe, client->workerid);
+			client->difficulty_actual, client->extranonce_subscribe, client->worker_id);
 		client->difficulty_written = client->difficulty_actual;
 	}
 

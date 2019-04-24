@@ -131,4 +131,26 @@ class Coin extends Model
     {
         return $this->hasMany('App\Models\Payout', 'coin_id');
     }
+
+    /**
+     * Scope a query to only enabled coins.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeEnabled($query)
+    {
+        return $query->where('enable', 1);
+    }
+
+    /**
+     * Scope a query to only visible coins.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeVisible($query)
+    {
+        return $query->where('visible', 1);
+    }
 }

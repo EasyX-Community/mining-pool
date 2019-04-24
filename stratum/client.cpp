@@ -81,7 +81,7 @@ bool client_subscribe(YAAMP_CLIENT *client, json_value *json_params)
 			client->extranonce1_id = client1->extranonce1_id;
 
 			client->user_id = client1->user_id;
-			client->workerid = client1->workerid;
+			client->worker_id = client1->worker_id;
 
 			memcpy(client->job_history, client1->job_history, sizeof(client->job_history));
 			client1->lock_count = 0;
@@ -243,7 +243,7 @@ bool client_authorize(YAAMP_CLIENT *client, json_value *json_params)
 		debuglog("new client %s, %s, %s\n", client->username, client->password, client->version);
 	}
 
-	if(!client->user_id || !client->workerid)
+	if(!client->user_id || !client->worker_id)
 	{
 		CommonLock(&g_db_mutex);
 		db_add_user(g_db, client);
@@ -499,7 +499,7 @@ bool client_auth_by_workers(YAAMP_CLIENT *client)
 //			{
 //				YAAMP_CLIENT *client = (YAAMP_CLIENT *)li->data;
 //				if(client->deleted) continue;
-//				if(!client->workerid) continue;
+//				if(!client->worker_id) continue;
 //
 //				if(!strcmp(source->ip, client->sock->ip))
 //					shutdown(client->sock->sock, SHUT_RDWR);
@@ -656,7 +656,7 @@ void *client_thread(void *p)
 
 	if(g_list_client.Find(client))
 	{
-		if(client->workerid && !client->reconnecting)
+		if(client->worker_id && !client->reconnecting)
 		{
 			CommonLock(&g_db_mutex);
 			db_clear_worker(g_db, client);

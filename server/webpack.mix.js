@@ -33,7 +33,8 @@ mix.react('resources/js/app.js', 'public/js')
       resolve: {
         alias: {
           '@': __dirname + '/resources/js',
-          '@pages': __dirname + '/resources/js/components/Pages'
+          '@pages': __dirname + '/resources/js/components/Pages',
+          '@mining': __dirname + '/resources/js/components/Mining'
         },
       },
     })

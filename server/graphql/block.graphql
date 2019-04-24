@@ -1,0 +1,28 @@
+extend type Query {
+  blocks: [Block!]! @paginate(type: "paginator" model: "App\\Models\\Block")
+  block(id: ID @eq): Block @find(model: "App\\Models\\Block")
+}
+
+
+
+type Block {
+    id: ID!
+    "Blockchain Height"
+    height: Int
+    confirmations: Int
+    time: Int
+    user_id: Int
+    worker_id: Int
+    difficulty_user: Float
+    price: Float
+    amount: Float
+    difficulty: Float
+    category: String
+    blockhash: String
+    txhash: String
+    segwit: Boolean
+    algorithm: Algorithm @belongsTo
+    coin: Coin @belongsTo
+    createdAt: DateTime! @rename(attribute: "created_at")
+    updatedAt: DateTime! @rename(attribute: "updated_at")
+}

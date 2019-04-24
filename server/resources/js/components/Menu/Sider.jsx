@@ -12,7 +12,9 @@ const { Sider } = Layout
 const SubMenu = Menu.SubMenu
 
 export default ({ collapsed, onCollapse }) => (
-  <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
+  <Sider collapsible collapsed={collapsed} onCollapse={onCollapse} style={{
+    boxShadow: "2px 0 6px rgba(0,21,41,.35)"
+}}>
     <Logo />
     <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
       <Menu.Item key="1">

@@ -3,7 +3,7 @@ class YAAMP_WORKER: public YAAMP_OBJECT
 {
 public:
 	int user_id;
-	int workerid;
+	int worker_id;
 	int coin_id;
 	int remoteid;
 
@@ -40,8 +40,8 @@ inline void share_delete(YAAMP_OBJECT *object)
 	delete share;
 }
 
-//YAAMP_WORKER *share_find_worker(int user_id, int workerid, int coin_id, bool valid);
-//void share_add_worker(int user_id, int workerid, int coin_id, bool valid, double difficulty);
+//YAAMP_WORKER *share_find_worker(int user_id, int worker_id, int coin_id, bool valid);
+//void share_add_worker(int user_id, int worker_id, int coin_id, bool valid, double difficulty);
 
 ///////////
 
@@ -61,7 +61,7 @@ public:
 	bool segwit;
 
 	int user_id;
-	int workerid;
+	int worker_id;
 	int coin_id;
 	int height;
 
@@ -99,7 +99,7 @@ inline void submit_delete(YAAMP_OBJECT *object)
 
 void block_prune(YAAMP_DB *db);
 
-void block_add(int user_id, int workerid, int coin_id, int height, double diff, double diff_user, const char *hash1, const char *h2, int segwit);
+void block_add(int user_id, int worker_id, int coin_id, int height, double diff, double diff_user, const char *hash1, const char *h2, int segwit);
 bool block_confirm(int coin_id, const char *hash);
 
 YAAMP_SUBMIT *submit_add(int remoteid, double difficulty);

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property integer $id
  * @property int $user_id
- * @property int $workerid
+ * @property int $worker_id
  * @property int $coin_id
  * @property int $jobid
  * @property int $pid
@@ -31,6 +31,6 @@ class Share extends Model
     /**
      * @var array
      */
-    protected $fillable = ['user_id', 'workerid', 'coin_id', 'jobid', 'pid', 'time', 'error', 'valid', 'extranonce1', 'difficulty', 'share_diff', 'algo'];
+    protected $fillable = ['user_id', 'worker_id', 'coin_id', 'jobid', 'pid', 'time', 'error', 'valid', 'extranonce1', 'difficulty', 'share_diff', 'algo'];
 
 }

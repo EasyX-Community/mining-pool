@@ -5,11 +5,23 @@ extend type Query {
 
 type Algorithm {
     id: ID!
+    "Gets the average hash rate for the entire life of the algorithm."
+    averageHashRate: String
+    "Gets the average hash rate for the last hour."
+    averageHashRate1h: String
+    "Gets the average hash rate for the 24 hours."
+    averageHashRate24h: String
+    "Gets the average hash rate for the 7 days."
+    averageHashRate7d: String
+    "Gets the average hash rate for the 30 days."
+    averageHashRate30d: String
+    "Gets the name of the algorithm"
     name: String
     profit: Float
     rent: Float
     factor: Float
     overflow: Boolean
+    hashRates: [HashRate] @hasMany(type: "connection")
     workers: [Worker!]! @hasMany(type: "connection")
     createdAt: DateTime! @rename(attribute: "created_at")
     updatedAt: DateTime! @rename(attribute: "updated_at")

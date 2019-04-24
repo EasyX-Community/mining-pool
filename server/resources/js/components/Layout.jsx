@@ -25,7 +25,7 @@ class LayoutBase extends Component {
       <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsed={this.state.collapsed} onCollapse={this.onCollapse} />
         <Layout>
-          <Header style={{ background: '#fff', padding: 0 }} />
+          <Header style={{ background: '#fff', padding: 0, boxShadow:" 0 1px 4px rgba(0,21,41,.08)" }} />
             <Content style={{ margin: '0 16px' }}>
               <Routes />
             </Content>

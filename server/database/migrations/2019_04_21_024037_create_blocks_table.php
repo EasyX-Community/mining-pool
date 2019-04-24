@@ -16,11 +16,11 @@ class CreateBlocksTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('coin_id')->nullable()->index('coin');
+			$table->integer('user_id')->nullable()->index('user1');
+			$table->integer('worker_id')->nullable();
 			$table->integer('height')->unsigned()->nullable()->index('height1');
 			$table->integer('confirmations')->nullable();
 			$table->integer('time')->nullable()->index('time');
-			$table->integer('user_id')->nullable()->index('user1');
-			$table->integer('workerid')->nullable();
 			$table->float('difficulty_user', 10, 0)->nullable();
 			$table->float('price', 10, 0)->nullable();
 			$table->float('amount', 10, 0)->nullable();
