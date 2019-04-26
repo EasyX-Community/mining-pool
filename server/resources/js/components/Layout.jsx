@@ -37,11 +37,10 @@ class LayoutBase extends Component {
               <Content style={{ margin: '0 16px' }}>
                 <Routes />
               </Content>
-           </Suspense>
+            </Suspense>
             <Footer style={{ textAlign: 'center' }}>
               DarkMatter Mining Pool &copy;2019; Created by HelixAlpha, Inc.
             </Footer>
-
           </Layout>
         </Layout>
       </BrowserRouter>

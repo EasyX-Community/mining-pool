@@ -3,9 +3,6 @@ import { Button } from 'antd'
 
 import styled from '@emotion/styled'
 
-
-
-
 const PageWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -41,7 +38,6 @@ const ImageElement = styled.div`
   background-size: contain;
 `
 
-
 const ContentWrapper = styled.div`
   flex: auto;
 `
@@ -71,11 +67,11 @@ class Exception extends React.PureComponent {
   static defaultProps = {
     backText: 'back to home',
     redirect: '/',
-  };
+  }
 
   constructor(props) {
-    super(props);
-    this.state = {};
+    super(props)
+    this.state = {}
   }
 
   render() {
@@ -89,27 +85,24 @@ class Exception extends React.PureComponent {
       actions,
       redirect,
       ...rest
-    } = this.props;
+    } = this.props
 
-    const img = 'https://gw.alipayobjects.com/zos/rmsportal/KpnpchXsobRgLElEozzI.svg'
+    const img =
+      'https://gw.alipayobjects.com/zos/rmsportal/KpnpchXsobRgLElEozzI.svg'
 
     return (
       <PageWrapper>
         <ImageBlock>
-          <ImageElement
-            style={{ backgroundImage: `url(${img})` }}
-          />
+          <ImageElement style={{ backgroundImage: `url(${img})` }} />
         </ImageBlock>
         <ContentWrapper>
           <ExceptionTitle>404</ExceptionTitle>
           <Description>Sorry, the page you visited doesn't exist.</Description>
-          <Actions>
-            
-          </Actions>
+          <Actions />
         </ContentWrapper>
       </PageWrapper>
-    );
+    )
   }
 }
 
-export default Exception;
+export default Exception
