@@ -33,7 +33,9 @@ mix.react('resources/js/app.js', 'public/js')
       resolve: {
         alias: {
           '@': __dirname + '/resources/js',
+          '@app': __dirname + '/resources/js',
           '@content': __dirname + '/resources/content',
+          '@graphql': __dirname + '/resources/graphql',
           '@helpers': __dirname + '/resources/js/helpers',
           '@mining': __dirname + '/resources/js/components/Mining',
           '@modals': __dirname + '/resources/js/components/Modals',
@@ -45,6 +47,11 @@ mix.react('resources/js/app.js', 'public/js')
           {
             test: /\.(md)$/i,
             use: 'raw-loader',
+          },
+          {
+            test: /\.(graphql|gql)$/,
+            exclude: /node_modules/,
+            loader: 'graphql-tag/loader',
           },
         ],
       }

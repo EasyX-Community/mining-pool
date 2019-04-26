@@ -1,13 +1,11 @@
-import React, { Component } from 'react'
-import { Layout, Menu, Breadcrumb, Icon } from 'antd'
-import styled from '@emotion/styled'
+import React, { Component, Suspense } from 'react'
+import { Layout } from 'antd'
 import Sider from './Menu/Sider'
 import Routes from '@/components/Routes'
 import { BrowserRouter } from 'react-router-dom'
+import Spinner from '@/components/Spinner'
 
-const MenuItemGroup = Menu.ItemGroup
 const { Header, Content, Footer } = Layout
-const SubMenu = Menu.SubMenu
 
 class LayoutBase extends Component {
   state = {
@@ -35,12 +33,15 @@ class LayoutBase extends Component {
                 boxShadow: ' 0 1px 4px rgba(0,21,41,.08)',
               }}
             />
-            <Content style={{ margin: '0 16px' }}>
-              <Routes />
-            </Content>
+            <Suspense fallback={<Spinner />}>
+              <Content style={{ margin: '0 16px' }}>
+                <Routes />
+              </Content>
+           </Suspense>
             <Footer style={{ textAlign: 'center' }}>
               DarkMatter Mining Pool &copy;2019; Created by HelixAlpha, Inc.
             </Footer>
+
           </Layout>
         </Layout>
       </BrowserRouter>

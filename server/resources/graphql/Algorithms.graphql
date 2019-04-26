@@ -1,0 +1,18 @@
+#import "./AlgorithmFields.graphql"
+
+query Algorithms($count: Int!, $page: Int) {
+  algorithms(count: $count, page: $page) {
+    data {
+      ...AlgorithmFields
+    }
+    paginatorInfo {
+      currentPage
+      count
+      hasMorePages
+      lastItem
+      lastPage
+      perPage
+      total
+    }
+  }
+}

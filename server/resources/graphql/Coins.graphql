@@ -1,0 +1,18 @@
+#import "./CoinFields.graphql"
+
+query Coins($count: Int!, $page: Int) {
+  coins(count: $count, page: $page) {
+    data {
+      ...CoinFields
+    }
+    paginatorInfo {
+      currentPage
+      count
+      hasMorePages
+      lastItem
+      lastPage
+      perPage
+      total
+    }
+  }
+}

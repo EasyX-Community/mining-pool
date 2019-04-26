@@ -2,6 +2,7 @@ import React from 'react'
 import { Table, Pagination } from 'antd'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
+import GET_ALGORITHMS from '@graphql/Algorithms.graphql'
 
 const columns = [
   {
@@ -65,27 +66,7 @@ class PoolStatus extends React.Component {
   render() {
     return (
       <Query
-        query={gql`
-          query Algorithms($count: Int!, $page: Int) {
-            algorithms(count: $count, page: $page) {
-              data {
-                name
-                coinCount
-                averageHashRate
-                port
-              }
-              paginatorInfo {
-                currentPage
-                count
-                hasMorePages
-                lastItem
-                lastPage
-                perPage
-                total
-              }
-            }
-          }
-        `}
+        query={GET_ALGORITHMS}
         variables={{
           page: this.state.page,
           count: this.state.count,

@@ -1,0 +1,30 @@
+@import '~antd/lib/style/themes/default.less';
+
+
+@media screen and (max-width: @screen-xl) {
+  .exception {
+    .imgBlock {
+      padding-right: 88px;
+    }
+  }
+}
+
+@media screen and (max-width: @screen-sm) {
+  .exception {
+    display: block;
+    text-align: center;
+    .imgBlock {
+      margin: 0 auto 24px;
+      padding-right: 0;
+    }
+  }
+}
+
+@media screen and (max-width: @screen-xs) {
+  .exception {
+    .imgBlock {
+      margin-bottom: -24px;
+      overflow: hidden;
+    }
+  }
+}

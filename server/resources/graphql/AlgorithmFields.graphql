@@ -1,0 +1,6 @@
+fragment AlgorithmFields on Algorithm {
+  name
+  coinCount
+  averageHashRate
+  port
+}
