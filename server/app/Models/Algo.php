@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Utilities\HashRates as HashRateUtils;
+use Laravel\Scout\Searchable;
 
 /**
  * @property int $id
@@ -15,6 +16,8 @@ use Utilities\HashRates as HashRateUtils;
  */
 class Algo extends Model
 {
+    use Searchable;
+
     /**
      * @var array
      */
@@ -177,13 +180,47 @@ class Algo extends Model
             'polytimos'	=> 8463,
             'skunk'		=> 8433,
             'tribus'	=> 8533,
-                'a5a'   	=> 8633,
+            'a5a'   	=> 8633,
         );
 
         if(!isset($a[$this->name]))
             return 3033;
 
         return $a[$this->name];
+    }
+
+    /**
+     * Returns the mBTC Factor
+     * 
+     * @return Int
+     */
+    public function getmBTCFactorAttribute()
+    {
+        switch($this->name) {
+            case 'sha256':
+            case 'sha256t':
+            case 'blake':
+            case 'blakecoin':
+            case 'blake2s':
+            case 'decred':
+            case 'keccak':
+            case 'keccakc':
+            case 'lbry':
+            case 'vanilla':
+                return 1000;
+            default:
+                return 1;
+        }
+    }
+
+    /**
+     * Get the index name for the model.
+     *
+     * @return string
+     */
+    public function searchableAs()
+    {
+        return 'algorithm';
     }
 }
 

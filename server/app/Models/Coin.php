@@ -165,4 +165,28 @@ class Coin extends Model
     {
         return $query->where('algo', $type);
     }
+
+    /**
+     * @return Float
+     */
+    public function getProfitabilityAttribute()
+    {
+        if(!$this->diifficulty){
+            return 0;
+        }
+        
+        $btcmhd = 20116.56761169 / $this->difficulty * $this->reward * $this->price;
+        if(!$this->auxpow && $this->rpc_encoding == 'POW')
+        {
+            $listaux = getdbolist('db_coins', "enable and visible and auto_ready and auxpow and algo='$coin->algo'");
+            $list_aux = $this->visible()->enabled()->OfAlgorithm($this->algo)->where('auto_ready', 1)->where('auxpow', 1);
+            foreach($listaux as $aux)
+            {
+                if(!$aux->difficulty) continue;
+    
+                $btcmhdaux = 20116.56761169 / $aux->difficulty * $aux->reward * $aux->price;
+                $btcmhd += $btcmhdaux;
+            }
+        }
+    }
 }

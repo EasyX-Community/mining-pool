@@ -1,5 +1,5 @@
 extend type Query {
-  algorithms: [Algorithm!]! @paginate(type: "paginator" model: "App\\Models\\Algo")
+  algorithms(count: Int, page: Int, search: String @search): [Algorithm!]! @paginate(type: "paginator" model: "App\\Models\\Algo")
   algorithm(id: ID @eq): Algorithm @find(model: "App\\Models\\Algo")
 }
 
@@ -20,6 +20,8 @@ type Algorithm {
     profit: Float
     "Gets the algorithm's port."
     port: Int
+    "Gets the mBTC factor."
+    mBTCFactor: Int
     rent: Float
     factor: Float
     overflow: Boolean

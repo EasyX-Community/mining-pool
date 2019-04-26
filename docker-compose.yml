@@ -17,7 +17,7 @@ services:
     image: helixalpha/app:latest
     env_file: .env
     ports:
-      - '80:80'
+      - '8081:80'
     volumes:
       - ./server/storage/app/public:/var/www/storage:delegated
       - ./server/public:/var/www/html:delegated

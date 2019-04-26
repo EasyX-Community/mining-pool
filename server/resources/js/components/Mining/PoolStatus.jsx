@@ -8,26 +8,31 @@ const columns = [
     title: 'Algorithm',
     dataIndex: 'name',
     key: 'name',
+    sorter: (a, b) => a.name.localeCompare(b.name),
   },
   {
     title: 'Port',
     dataIndex: 'port',
     key: 'port',
+    sorter: (a, b) => a.port - b.port,
   },
   {
     title: 'Coins',
     dataIndex: 'coins',
     key: 'coins',
+    sorter: (a, b) => a.cions - b.coins,
   },
   {
     title: 'Miners',
     dataIndex: 'miners',
     key: 'miners',
+    sorter: (a, b) => a.miners - b.miners,
   },
   {
     title: 'Hashrate',
     dataIndex: 'hashrates',
     key: 'hashrates',
+    sorter: (a, b) => a.hashrates - b.hashrates,
   },
 ]
 
@@ -36,25 +41,33 @@ function onChange(pagination, filters, sorter) {
 }
 
 class PoolStatus extends React.Component {
+  state = {
+    page: 1,
+    count: 10,
+    term: undefined,
+  }
+
   transformAlgorithms = data => {
-    return data.algorithms.data.reduce((carry, algorithm, index) => {
-      carry.push({
-        key: index,
-        name: algorithm.name,
-        hashrates: algorithm.averageHashRate + 'h/s',
-        coins: algorithm.coinCount,
-        port: algorithm.port,
-      })
-      return carry
-    }, [])
+    return data
+      ? data.algorithms.data.reduce((carry, algorithm, index) => {
+          carry.push({
+            key: index,
+            name: algorithm.name,
+            hashrates: algorithm.averageHashRate + 'h/s',
+            coins: algorithm.coinCount,
+            port: algorithm.port,
+          })
+          return carry
+        }, [])
+      : []
   }
 
   render() {
     return (
       <Query
         query={gql`
-          {
-            algorithms(count: 10) {
+          query Algorithms($count: Int!, $page: Int) {
+            algorithms(count: $count, page: $page) {
               data {
                 name
                 coinCount
@@ -73,30 +86,37 @@ class PoolStatus extends React.Component {
             }
           }
         `}
+        variables={{
+          page: this.state.page,
+          count: this.state.count,
+        }}
       >
-        {({ data, loading }) => {
-          const paginatorInfo = !loading && data.algorithms.paginatorInfo
-          const algorithms = !loading ? this.transformAlgorithms(data) : []
-          console.log(paginatorInfo)
+        {({ data, loading, error }) => {
+          const paginatorInfo =
+            !loading && !error ? data.algorithms.paginatorInfo : {}
+          const algorithms =
+            !loading && !error ? this.transformAlgorithms(data) : []
           return (
-            <div>
+            <React.Fragment>
               <Table
                 columns={columns}
                 onChange={onChange}
                 dataSource={algorithms}
                 loading={loading}
-                pagination={false}
+                onChange={(pagination, filters, sorter) => {
+                  this.setState({
+                    count: pagination.pageSize,
+                    page: pagination.current,
+                  })
+                }}
                 pagination={{
-                  onChange: () => {
-                    console.log('test')
-                  },
                   total: paginatorInfo.total,
-                  defaultPageSize: 10,
+                  pageSize: this.state.count,
                   showSizeChanger: true,
-                  pageSizeOptions: ['10', '20', '30'],
+                  pageSizeOptions: ['10', '20', '30', '50', '100'],
                 }}
               />
-            </div>
+            </React.Fragment>
           )
         }}
       </Query>

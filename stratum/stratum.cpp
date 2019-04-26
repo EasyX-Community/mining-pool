@@ -235,7 +235,7 @@ int main(int argc, char **argv)
 	initlog(argv[1]);
 
 #ifdef NO_EXCHANGE
-	// todo: init with a db setting or a yiimp shell command
+	// todo: init with a artisan command
 	g_autoexchange = false;
 #endif
 
@@ -245,7 +245,7 @@ int main(int argc, char **argv)
 	dictionary *ini = iniparser_load(configfile);
 	if(!ini)
 	{
-		debuglog("cant load config file %s\n", configfile);
+		debuglog("Can't load config file %s\n", configfile);
 		return 1;
 	}
 

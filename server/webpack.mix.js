@@ -33,8 +33,19 @@ mix.react('resources/js/app.js', 'public/js')
       resolve: {
         alias: {
           '@': __dirname + '/resources/js',
+          '@content': __dirname + '/resources/content',
+          '@helpers': __dirname + '/resources/js/helpers',
+          '@mining': __dirname + '/resources/js/components/Mining',
+          '@modals': __dirname + '/resources/js/components/Modals',
           '@pages': __dirname + '/resources/js/components/Pages',
-          '@mining': __dirname + '/resources/js/components/Mining'
         },
       },
+      module: {
+        rules: [
+          {
+            test: /\.(md)$/i,
+            use: 'raw-loader',
+          },
+        ],
+      }
     })
