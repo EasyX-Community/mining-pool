@@ -1,6 +1,23 @@
+
 fragment AlgorithmFields on Algorithm {
+  id
   name
   coinCount
   averageHashRate
   port
+  averageHashRate
+  averageHashRate1h
+  averageHashRate24h
+  averageHashRate7d
+  averageHashRate30d
+  name
+  profit
+  port
+  mBTCFactor
+  rent
+  factor
+  overflow
+  coinCount
+  createdAt
+  updatedAt
 }

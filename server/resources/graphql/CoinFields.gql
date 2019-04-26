@@ -1,4 +1,0 @@
-fragment CoinFields on Coin {
-  symbol
-  symbol2
-}

@@ -1,6 +1,5 @@
 import React from 'react'
-import { Table, Pagination } from 'antd'
-import gql from 'graphql-tag'
+import { Table } from 'antd'
 import { Query } from 'react-apollo'
 import GET_ALGORITHMS from '@graphql/Algorithms.graphql'
 
