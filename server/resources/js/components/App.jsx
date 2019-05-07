@@ -1,22 +1,36 @@
-import React, { Component, Suspense } from 'react'
+import React, { Component, Suspense, lazy } from 'react'
 import ReactDOM from 'react-dom'
 import { ApolloProvider } from 'react-apollo'
 import { ApolloClient } from 'apollo-client'
-import Layout from './Layout'
 import { Modal } from 'antd'
 import { ModalRoot, withModalProvider } from '@modals'
 import 'antd/dist/antd.css'
 import { ApolloLink } from 'apollo-link'
-import { createHttpLink } from 'apollo-link-http'
+import { HttpLink } from 'apollo-link-http'
 import { onError } from 'apollo-link-error'
 import { InMemoryCache } from 'apollo-cache-inmemory'
-import { ModalContext } from '@modals'
 import { compose } from 'recompose'
 import { Global, css } from '@emotion/core'
+import Routes from './Routes'
+import { withLayoutProvider } from '@layout/Context'
+import { BrowserRouter } from 'react-router-dom'
+import Layout from '@layout'
+import { CookiesProvider, withCookies } from 'react-cookie'
+import AuthProvider, { AuthConsumer, AuthRoutes } from '@auth'
 
 const cache = new InMemoryCache()
 
-const httpLink = createHttpLink({ uri: 'graphql' })
+const token = document.head.querySelector('meta[name="csrf-token"]').content
+
+//Sets the headers using Apollo Http Link
+const httpLink = new HttpLink({
+  uri: 'graphql',
+  headers: {
+    'X-CSRF-TOKEN': token,
+    'X-Requested-With': 'XMLHttpRequest',
+    Accept: 'application/json',
+  },
+})
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
@@ -45,6 +59,7 @@ const link = ApolloLink.from([errorLink, httpLink])
 const client = new ApolloClient({
   link,
   cache,
+  connectToDevTools: true,
 })
 
 const global = css`
@@ -66,18 +81,41 @@ export class App extends Component {
     })
   }
 
+  componentDidMount() {}
+
   render() {
     return (
-      <ApolloProvider client={client} cache={cache}>
-        <Global styles={global} />
-        <Layout />
-        <ModalRoot />
-      </ApolloProvider>
+      <CookiesProvider>
+        <BrowserRouter>
+          <ApolloProvider client={client} cache={cache}>
+            <AuthProvider>
+              <Global styles={global} />
+              <AuthConsumer>
+                {auth =>
+                  auth.isAuthenticated ? (
+                    <>
+                      <Layout>
+                        <Routes />
+                      </Layout>
+                      <ModalRoot />
+                    </>
+                  ) : (
+                    <AuthRoutes />
+                  )
+                }
+              </AuthConsumer>
+            </AuthProvider>
+          </ApolloProvider>
+        </BrowserRouter>
+      </CookiesProvider>
     )
   }
 }
 
-export const BaseApp = compose(withModalProvider)(App)
+export const BaseApp = compose(
+  withModalProvider,
+  withLayoutProvider
+)(App)
 
 if (document.getElementById('root')) {
   ReactDOM.render(<BaseApp />, document.getElementById('root'))

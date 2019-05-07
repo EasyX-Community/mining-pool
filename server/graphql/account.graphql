@@ -14,7 +14,6 @@ type Account {
     username: String
     coinsymbol: String
     swap_time: Int
-    login: String
     hostaddr: String
     payouts: Payout @hasMany
     coin: Coin @belongsTo

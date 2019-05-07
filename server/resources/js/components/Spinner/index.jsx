@@ -3,12 +3,11 @@ import { Spin } from 'antd'
 import styled from '@emotion/styled'
 
 const SpinnerWrapper = styled.div`
-  text-align: center;
-  background: rgba(0, 0, 0, 0.05);
-  border-radius: 4px;
-  margin-bottom: 20px;
-  padding: 30px 50px;
-  margin: 20px 0;
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
 `
 
 export default () => (

@@ -1,7 +1,9 @@
 import React, { createElement } from 'react'
 import { Button } from 'antd'
-
 import styled from '@emotion/styled'
+import withSuspense from '@helpers/withSuspense'
+import Layout from '@layout'
+import { compose } from 'recompose'
 
 const PageWrapper = styled.div`
   display: flex;
@@ -91,18 +93,22 @@ class Exception extends React.PureComponent {
       'https://gw.alipayobjects.com/zos/rmsportal/KpnpchXsobRgLElEozzI.svg'
 
     return (
-      <PageWrapper>
-        <ImageBlock>
-          <ImageElement style={{ backgroundImage: `url(${img})` }} />
-        </ImageBlock>
-        <ContentWrapper>
-          <ExceptionTitle>404</ExceptionTitle>
-          <Description>Sorry, the page you visited doesn't exist.</Description>
-          <Actions />
-        </ContentWrapper>
-      </PageWrapper>
+      <div>
+        <PageWrapper>
+          <ImageBlock>
+            <ImageElement style={{ backgroundImage: `url(${img})` }} />
+          </ImageBlock>
+          <ContentWrapper>
+            <ExceptionTitle>404</ExceptionTitle>
+            <Description>
+              Sorry, the page you visited doesn't exist.
+            </Description>
+            <Actions />
+          </ContentWrapper>
+        </PageWrapper>
+      </div>
     )
   }
 }
 
-export default Exception
+export default compose()(Exception)

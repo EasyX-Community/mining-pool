@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
-import { Layout, Menu, Breadcrumb, Icon } from 'antd'
+import { Layout, Menu, Icon } from 'antd'
 import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router'
+import { compose } from 'recompose'
 
 const Logo = styled.div`
   height: 32px;
@@ -11,7 +13,7 @@ const Logo = styled.div`
 const { Sider } = Layout
 const SubMenu = Menu.SubMenu
 
-export default ({ collapsed, onCollapse }) => (
+export const BaseSider = ({ collapsed, onCollapse }) => (
   <Sider
     collapsible
     collapsed={collapsed}
@@ -68,3 +70,5 @@ export default ({ collapsed, onCollapse }) => (
     </Menu>
   </Sider>
 )
+
+export default compose(withRouter)(BaseSider)

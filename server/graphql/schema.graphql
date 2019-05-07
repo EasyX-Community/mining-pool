@@ -9,6 +9,7 @@ type Mutation
 
 #import account.graphql
 #import algorithm.graphql
+#import auth.graphql
 #import balance.graphql
 #import block.graphql
 #import bookmark.graphql

@@ -34,6 +34,8 @@ mix.react('resources/js/app.js', 'public/js')
         alias: {
           '@': __dirname + '/resources/js',
           '@app': __dirname + '/resources/js',
+          '@auth': __dirname + '/resources/js/components/Auth',
+          '@layout': __dirname + '/resources/js/components/Layout',
           '@content': __dirname + '/resources/content',
           '@graphql': __dirname + '/resources/graphql',
           '@helpers': __dirname + '/resources/js/helpers',

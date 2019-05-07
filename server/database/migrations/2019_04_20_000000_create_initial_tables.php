@@ -17,7 +17,6 @@ class CreateInitialTables extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->bigInteger('wallet_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
@@ -42,7 +41,6 @@ class CreateInitialTables extends Migration
     {
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_resets');
-        Schema::dropIfExists('wallets');
 
     }
 }

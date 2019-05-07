@@ -3,7 +3,7 @@
 #  * @property MarketHistory[] $marketHistories
 #  * @property Notification[] $notifications
 
-extend type Query {
+extend type Query @group(middleware: ["auth:api"])  {
   coins: [Coin!]! @paginate(type: "paginator" model: "App\\Models\\Coin")
   coin(id: ID @eq): Coin @find(model: "App\\Models\\Coin")
 }
@@ -259,3 +259,4 @@ type Coin {
     createdAt: DateTime! @rename(attribute: "created_at")
     updatedAt: DateTime! @rename(attribute: "updated_at")
 }
+

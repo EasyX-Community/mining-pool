@@ -11,6 +11,7 @@ import {
   ProductInfoModal,
 } from '@modals'
 import { compose } from 'recompose'
+import withSuspense from '@helpers/withSuspense'
 
 const RightContent = styled.div`
   min-width: 240px;
@@ -124,4 +125,7 @@ export const Dashboard = ({ showModal }) => (
   </div>
 )
 
-export default compose(withModalConsumer)(Dashboard)
+export default compose(
+  withModalConsumer,
+  withSuspense
+)(Dashboard)

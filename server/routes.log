@@ -1,7 +1,33 @@
-+--------------------------+----------+--------------------+--------------------+-------------------------------------------------------+--------------+
-|[32m Domain                   [39m|[32m Method   [39m|[32m URI                [39m|[32m Name               [39m|[32m Action                                                [39m|[32m Middleware   [39m|
-+--------------------------+----------+--------------------+--------------------+-------------------------------------------------------+--------------+
-|                          | GET|HEAD | /                  |                    | Closure                                               | web          |
-|                          | GET|HEAD | api/user           |                    | Closure                                               | api,auth:api |
-| darkmatter.local/graphql | GET|HEAD | graphql-playground | graphql-playground | MLL\GraphQLPlayground\GraphQLPlaygroundController@get |              |
-+--------------------------+----------+--------------------+--------------------+-------------------------------------------------------+--------------+
++--------+----------+-----------------------------------------+-----------------------------------+---------------------------------------------------------------------------+--------------+
+|[32m Domain [39m|[32m Method   [39m|[32m URI                                     [39m|[32m Name                              [39m|[32m Action                                                                    [39m|[32m Middleware   [39m|
++--------+----------+-----------------------------------------+-----------------------------------+---------------------------------------------------------------------------+--------------+
+|        | GET|HEAD | api/user                                |                                   | Closure                                                                   | api,auth:api |
+|        | POST     | graphql                                 | lighthouse.graphql                | Nuwave\Lighthouse\Support\Http\Controllers\GraphQLController@query        |              |
+|        | GET|HEAD | graphql                                 | lighthouse.graphql                | Nuwave\Lighthouse\Support\Http\Controllers\GraphQLController@query        |              |
+|        | GET|HEAD | graphql-playground                      | graphql-playground                | MLL\GraphQLPlayground\GraphQLPlaygroundController@get                     |              |
+|        | POST     | login                                   |                                   | App\Http\Controllers\Auth\LoginController@login                           | web,guest    |
+|        | GET|HEAD | login                                   | login                             | App\Http\Controllers\Auth\LoginController@showLoginForm                   | web,guest    |
+|        | POST     | logout                                  | logout                            | App\Http\Controllers\Auth\LoginController@logout                          | web          |
+|        | DELETE   | oauth/authorize                         | passport.authorizations.deny      | Laravel\Passport\Http\Controllers\DenyAuthorizationController@deny        | web,auth     |
+|        | POST     | oauth/authorize                         | passport.authorizations.approve   | Laravel\Passport\Http\Controllers\ApproveAuthorizationController@approve  | web,auth     |
+|        | GET|HEAD | oauth/authorize                         | passport.authorizations.authorize | Laravel\Passport\Http\Controllers\AuthorizationController@authorize       | web,auth     |
+|        | GET|HEAD | oauth/clients                           | passport.clients.index            | Laravel\Passport\Http\Controllers\ClientController@forUser                | web,auth     |
+|        | POST     | oauth/clients                           | passport.clients.store            | Laravel\Passport\Http\Controllers\ClientController@store                  | web,auth     |
+|        | PUT      | oauth/clients/{client_id}               | passport.clients.update           | Laravel\Passport\Http\Controllers\ClientController@update                 | web,auth     |
+|        | DELETE   | oauth/clients/{client_id}               | passport.clients.destroy          | Laravel\Passport\Http\Controllers\ClientController@destroy                | web,auth     |
+|        | GET|HEAD | oauth/personal-access-tokens            | passport.personal.tokens.index    | Laravel\Passport\Http\Controllers\PersonalAccessTokenController@forUser   | web,auth     |
+|        | POST     | oauth/personal-access-tokens            | passport.personal.tokens.store    | Laravel\Passport\Http\Controllers\PersonalAccessTokenController@store     | web,auth     |
+|        | DELETE   | oauth/personal-access-tokens/{token_id} | passport.personal.tokens.destroy  | Laravel\Passport\Http\Controllers\PersonalAccessTokenController@destroy   | web,auth     |
+|        | GET|HEAD | oauth/scopes                            | passport.scopes.index             | Laravel\Passport\Http\Controllers\ScopeController@all                     | web,auth     |
+|        | POST     | oauth/token                             | passport.token                    | Laravel\Passport\Http\Controllers\AccessTokenController@issueToken        | throttle     |
+|        | POST     | oauth/token/refresh                     | passport.token.refresh            | Laravel\Passport\Http\Controllers\TransientTokenController@refresh        | web,auth     |
+|        | GET|HEAD | oauth/tokens                            | passport.tokens.index             | Laravel\Passport\Http\Controllers\AuthorizedAccessTokenController@forUser | web,auth     |
+|        | DELETE   | oauth/tokens/{token_id}                 | passport.tokens.destroy           | Laravel\Passport\Http\Controllers\AuthorizedAccessTokenController@destroy | web,auth     |
+|        | POST     | password/email                          | password.email                    | App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail     | web,guest    |
+|        | GET|HEAD | password/reset                          | password.request                  | App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm    | web,guest    |
+|        | POST     | password/reset                          | password.update                   | App\Http\Controllers\Auth\ResetPasswordController@reset                   | web,guest    |
+|        | GET|HEAD | password/reset/{token}                  | password.reset                    | App\Http\Controllers\Auth\ResetPasswordController@showResetForm           | web,guest    |
+|        | GET|HEAD | register                                | register                          | App\Http\Controllers\Auth\RegisterController@showRegistrationForm         | web,guest    |
+|        | POST     | register                                |                                   | App\Http\Controllers\Auth\RegisterController@register                     | web,guest    |
+|        | GET|HEAD | {path?}                                 | home                              | App\Http\Controllers\Home@index                                           | web          |
++--------+----------+-----------------------------------------+-----------------------------------+---------------------------------------------------------------------------+--------------+

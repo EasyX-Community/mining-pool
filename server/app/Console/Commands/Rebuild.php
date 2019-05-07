@@ -56,5 +56,6 @@ class Rebuild extends Command
         $this->call('db:seed', [
             '--class' => $this->option('seeder')
         ]);
+        // $this->call('passport:install');
     }
 }
