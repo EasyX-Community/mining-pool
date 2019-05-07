@@ -26,7 +26,7 @@ And of course HAMP itself is open source with a [public repository](https://gith
 
 ### Installation
 
-Install the recent version of [node](https://nodejs.org), (docker)[https://docker.com] and [docker-compose](https://github.com/Yelp/docker-compose/blob/master/docs/install.md). We recommend using [asdf](https://github.com/asdf-vm/asdf).
+Install the recent version of [node](https://nodejs.org), [docker](https://docker.com) and [docker-compose](https://github.com/Yelp/docker-compose/blob/master/docs/install.md). We recommend using [asdf](https://github.com/asdf-vm/asdf).
 
 Follow these steps to get the project working. The stratum server is still being developed, so it might not work as expected.
 
