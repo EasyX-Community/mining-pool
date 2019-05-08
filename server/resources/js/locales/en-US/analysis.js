@@ -31,4 +31,4 @@ export default {
   'app.analysis.table.search-keyword': 'Keyword',
   'app.analysis.table.users': 'Users',
   'app.analysis.table.weekly-range': 'Weekly Range',
-};
+}

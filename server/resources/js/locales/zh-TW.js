@@ -1,16 +1,16 @@
-import analysis from './zh-TW/analysis';
-import exception from './zh-TW/exception';
-import form from './zh-TW/form';
-import globalHeader from './zh-TW/globalHeader';
-import login from './zh-TW/login';
-import menu from './zh-TW/menu';
-import monitor from './zh-TW/monitor';
-import result from './zh-TW/result';
-import settingDrawer from './zh-TW/settingDrawer';
-import settings from './zh-TW/settings';
-import pwa from './zh-TW/pwa';
-import component from './zh-TW/component';
-import editor from './zh-TW/editor';
+import analysis from './zh-TW/analysis'
+import exception from './zh-TW/exception'
+import form from './zh-TW/form'
+import globalHeader from './zh-TW/globalHeader'
+import login from './zh-TW/login'
+import menu from './zh-TW/menu'
+import monitor from './zh-TW/monitor'
+import result from './zh-TW/result'
+import settingDrawer from './zh-TW/settingDrawer'
+import settings from './zh-TW/settings'
+import pwa from './zh-TW/pwa'
+import component from './zh-TW/component'
+import editor from './zh-TW/editor'
 
 export default {
   'navBar.lang': '語言',
@@ -34,4 +34,4 @@ export default {
   ...pwa,
   ...component,
   ...editor,
-};
+}

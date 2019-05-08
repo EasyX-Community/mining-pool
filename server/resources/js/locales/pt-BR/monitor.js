@@ -3,7 +3,8 @@ export default {
   'app.monitor.total-transactions': 'Total de transações hoje',
   'app.monitor.sales-target': 'Taxa de conclusão da meta de vendas',
   'app.monitor.remaining-time': 'Tempo restante da atividade',
-  'app.monitor.total-transactions-per-second': 'Total de transações por segundo',
+  'app.monitor.total-transactions-per-second':
+    'Total de transações por segundo',
   'app.monitor.activity-forecast': 'Previsão atual',
   'app.monitor.efficiency': 'Eficiência',
   'app.monitor.ratio': 'Relação',
@@ -16,4 +17,4 @@ export default {
   'app.monitor.resource-surplus': 'Excedente de recursos',
   'app.monitor.fund-surplus': 'Excedente do fundo',
   'app.exception.back': 'Voltar a home',
-};
+}

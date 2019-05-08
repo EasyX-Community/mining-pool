@@ -2,10 +2,12 @@ export default {
   'app.result.error.title': 'A Submissão Falhou',
   'app.result.error.description':
     'Por favor, verifique e modifique as seguintes informações antes de reenviar.',
-  'app.result.error.hint-title': 'O conteúdo que você enviou tem o seguinte erro:',
+  'app.result.error.hint-title':
+    'O conteúdo que você enviou tem o seguinte erro:',
   'app.result.error.hint-text1': 'Sua conta foi congelada',
   'app.result.error.hint-btn1': 'Descongele imediatamente',
-  'app.result.error.hint-text2': 'Sua conta ainda não está qualificada para se candidatar',
+  'app.result.error.hint-text2':
+    'Sua conta ainda não está qualificada para se candidatar',
   'app.result.error.hint-btn2': 'Atualizar imediatamente',
   'app.result.error.btn-text': 'Retornar para modificar',
   'app.result.success.title': 'A Submissão foi um Sucesso',
@@ -25,4 +27,4 @@ export default {
   'app.result.success.btn-return': 'Voltar a lista',
   'app.result.success.btn-project': 'Ver projeto',
   'app.result.success.btn-print': 'imprimir',
-};
+}

@@ -28,7 +28,8 @@ export default {
   'form.weight.label': 'Peso',
   'form.weight.placeholder': 'Por favor, entre com o peso',
   'form.public.label': 'Revelação de objetivo',
-  'form.public.label.help': 'Clientes e convidados são compartilhados por padrão',
+  'form.public.label.help':
+    'Clientes e convidados são compartilhados por padrão',
   'form.public.radio.public': 'Publico',
   'form.public.radio.partially-public': 'Parcialmente publico',
   'form.public.radio.private': 'Privado',
@@ -36,4 +37,4 @@ export default {
   'form.publicUsers.option.A': 'Colega A',
   'form.publicUsers.option.B': 'Colega B',
   'form.publicUsers.option.C': 'Colega C',
-};
+}

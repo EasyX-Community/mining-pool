@@ -3,4 +3,4 @@ export default {
   'component.tagSelect.collapse': 'Diminuir',
   'component.tagSelect.all': 'Todas',
   'component.miniProgress.tooltipDefault': 'Valor alvo',
-};
+}

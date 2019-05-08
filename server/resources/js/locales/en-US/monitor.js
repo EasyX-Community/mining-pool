@@ -15,4 +15,4 @@ export default {
   'app.monitor.popular-searches': 'Popular Searches',
   'app.monitor.resource-surplus': 'Resource Surplus',
   'app.monitor.fund-surplus': 'Fund Surplus',
-};
+}

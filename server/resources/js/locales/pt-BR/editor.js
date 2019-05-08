@@ -8,4 +8,4 @@ export default {
   'app.editor.mind.title': 'Editor de mapas cerebrales',
   'app.editor.mind.description':
     'El mapa cerebral es una herramienta de pensamiento gráfico eficaz para expresar el pensamiento divergente. Es simple pero efectivo y es una herramienta de pensamiento práctico.',
-};
+}

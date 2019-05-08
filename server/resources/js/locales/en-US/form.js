@@ -23,7 +23,8 @@ export default {
   'form.client.placeholder':
     'Please describe your customer service, internal customers directly @ Name / job number',
   'form.invites.label': 'Inviting critics',
-  'form.invites.placeholder': 'Please direct @ Name / job number, you can invite up to 5 people',
+  'form.invites.placeholder':
+    'Please direct @ Name / job number, you can invite up to 5 people',
   'form.weight.label': 'Weight',
   'form.weight.placeholder': 'Please enter weight',
   'form.public.label': 'Target disclosure',
@@ -35,4 +36,4 @@ export default {
   'form.publicUsers.option.A': 'Colleague A',
   'form.publicUsers.option.B': 'Colleague B',
   'form.publicUsers.option.C': 'Colleague C',
-};
+}

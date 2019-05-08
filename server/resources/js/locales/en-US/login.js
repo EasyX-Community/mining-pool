@@ -1,7 +1,8 @@
 export default {
   'app.login.userName': 'userName',
   'app.login.password': 'password',
-  'app.login.message-invalid-credentials': 'Invalid username or password（admin/ant.design）',
+  'app.login.message-invalid-credentials':
+    'Invalid username or password（admin/ant.design）',
   'app.login.message-invalid-verification-code': 'Invalid verification code',
   'app.login.tab-login-credentials': 'Credentials',
   'app.login.tab-login-mobile': 'Mobile number',
@@ -33,9 +34,10 @@ export default {
   'validation.confirm-password.required': 'Please confirm your password!',
   'validation.phone-number.required': 'Please enter your phone number!',
   'validation.phone-number.wrong-format': 'Malformed phone number!',
-  'validation.verification-code.required': 'Please enter the verification code!',
+  'validation.verification-code.required':
+    'Please enter the verification code!',
   'validation.title.required': 'Please enter a title',
   'validation.date.required': 'Please select the start and end date',
   'validation.goal.required': 'Please enter a description of the goal',
   'validation.standard.required': 'Please enter a metric',
-};
+}

@@ -15,4 +15,4 @@ export default {
   'app.monitor.popular-searches': '热门搜索',
   'app.monitor.resource-surplus': '资源剩余',
   'app.monitor.fund-surplus': '补贴资金剩余',
-};
+}

@@ -31,4 +31,4 @@ export default {
   'app.analysis.table.search-keyword': '搜索关键词',
   'app.analysis.table.users': '用户数',
   'app.analysis.table.weekly-range': '周涨幅',
-};
+}

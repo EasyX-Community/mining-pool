@@ -34,4 +34,4 @@ export default {
   'form.publicUsers.option.A': '同事甲',
   'form.publicUsers.option.B': '同事乙',
   'form.publicUsers.option.C': '同事丙',
-};
+}

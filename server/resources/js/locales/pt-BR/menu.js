@@ -10,8 +10,10 @@ export default {
   'menu.form': 'Formulário',
   'menu.form.basicform': 'Formulário Básico',
   'menu.form.stepform': 'Formulário Assistido',
-  'menu.form.stepform.info': 'Formulário Assistido(gravar informações de transferência)',
-  'menu.form.stepform.confirm': 'Formulário Assistido(confirmar informações de transferência)',
+  'menu.form.stepform.info':
+    'Formulário Assistido(gravar informações de transferência)',
+  'menu.form.stepform.confirm':
+    'Formulário Assistido(confirmar informações de transferência)',
   'menu.form.stepform.result': 'Formulário Assistido(finalizado)',
   'menu.form.advancedform': 'Formulário Avançado',
   'menu.list': 'Lista',
@@ -42,4 +44,4 @@ export default {
   'menu.editor.flow': 'Flow Editor',
   'menu.editor.mind': 'Mind Editor',
   'menu.editor.koni': 'Koni Editor',
-};
+}

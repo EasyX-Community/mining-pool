@@ -3,7 +3,8 @@ export default {
   'app.login.password': 'Sua senha',
   'app.login.message-invalid-credentials':
     'Nome de usuário ou senha inválidosd（admin/ant.design）',
-  'app.login.message-invalid-verification-code': 'Código de verificação inválido',
+  'app.login.message-invalid-verification-code':
+    'Código de verificação inválido',
   'app.login.tab-login-credentials': 'Credenciais',
   'app.login.tab-login-mobile': 'Telefone',
   'app.login.remember-me': 'Lembre-me',
@@ -34,5 +35,6 @@ export default {
   'validation.confirm-password.required': 'Por favor confirme sua senha!',
   'validation.phone-number.required': 'Por favor insira seu telefone!',
   'validation.phone-number.wrong-format': 'Formato de telefone errado!',
-  'validation.verification-code.required': 'Por favor insira seu código de verificação!',
-};
+  'validation.verification-code.required':
+    'Por favor insira seu código de verificação!',
+}

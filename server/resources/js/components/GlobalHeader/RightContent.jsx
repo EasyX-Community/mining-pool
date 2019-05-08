@@ -1,27 +1,27 @@
-import React, { PureComponent } from 'react';
-import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
-import { Spin, Tag, Menu, Icon, Avatar, Tooltip, message } from 'antd';
-import moment from 'moment';
-import groupBy from 'lodash/groupBy';
-import NoticeIcon from '../NoticeIcon';
-import HeaderSearch from '../HeaderSearch';
-import HeaderDropdown from '../HeaderDropdown';
-import SelectLang from '../SelectLang';
-import styles from './index.less';
+import React, { PureComponent } from 'react'
+import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale'
+import { Spin, Tag, Menu, Icon, Avatar, Tooltip, message } from 'antd'
+import moment from 'moment'
+import groupBy from 'lodash/groupBy'
+import NoticeIcon from '../NoticeIcon'
+import HeaderSearch from '../HeaderSearch'
+import HeaderDropdown from '../HeaderDropdown'
+import SelectLang from '../SelectLang'
+import styles from './index.less'
 
 export default class GlobalHeaderRight extends PureComponent {
   getNoticeData() {
-    const { notices = [] } = this.props;
+    const { notices = [] } = this.props
     if (notices.length === 0) {
-      return {};
+      return {}
     }
     const newNotices = notices.map(notice => {
-      const newNotice = { ...notice };
+      const newNotice = { ...notice }
       if (newNotice.datetime) {
-        newNotice.datetime = moment(notice.datetime).fromNow();
+        newNotice.datetime = moment(notice.datetime).fromNow()
       }
       if (newNotice.id) {
-        newNotice.key = newNotice.id;
+        newNotice.key = newNotice.id
       }
       if (newNotice.extra && newNotice.status) {
         const color = {
@@ -29,39 +29,39 @@ export default class GlobalHeaderRight extends PureComponent {
           processing: 'blue',
           urgent: 'red',
           doing: 'gold',
-        }[newNotice.status];
+        }[newNotice.status]
         newNotice.extra = (
           <Tag color={color} style={{ marginRight: 0 }}>
             {newNotice.extra}
           </Tag>
-        );
+        )
       }
-      return newNotice;
-    });
-    return groupBy(newNotices, 'type');
+      return newNotice
+    })
+    return groupBy(newNotices, 'type')
   }
 
   getUnreadData = noticeData => {
-    const unreadMsg = {};
+    const unreadMsg = {}
     Object.entries(noticeData).forEach(([key, value]) => {
       if (!unreadMsg[key]) {
-        unreadMsg[key] = 0;
+        unreadMsg[key] = 0
       }
       if (Array.isArray(value)) {
-        unreadMsg[key] = value.filter(item => !item.read).length;
+        unreadMsg[key] = value.filter(item => !item.read).length
       }
-    });
-    return unreadMsg;
-  };
+    })
+    return unreadMsg
+  }
 
   changeReadState = clickedItem => {
-    const { id } = clickedItem;
-    const { dispatch } = this.props;
+    const { id } = clickedItem
+    const { dispatch } = this.props
     dispatch({
       type: 'global/changeNoticeReadState',
       payload: id,
-    });
-  };
+    })
+  }
 
   render() {
     const {
@@ -71,20 +71,29 @@ export default class GlobalHeaderRight extends PureComponent {
       onMenuClick,
       onNoticeClear,
       theme,
-    } = this.props;
+    } = this.props
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
         <Menu.Item key="userCenter">
           <Icon type="user" />
-          <FormattedMessage id="menu.account.center" defaultMessage="account center" />
+          <FormattedMessage
+            id="menu.account.center"
+            defaultMessage="account center"
+          />
         </Menu.Item>
         <Menu.Item key="userinfo">
           <Icon type="setting" />
-          <FormattedMessage id="menu.account.settings" defaultMessage="account settings" />
+          <FormattedMessage
+            id="menu.account.settings"
+            defaultMessage="account settings"
+          />
         </Menu.Item>
         <Menu.Item key="triggerError">
           <Icon type="close-circle" />
-          <FormattedMessage id="menu.account.trigger" defaultMessage="Trigger Error" />
+          <FormattedMessage
+            id="menu.account.trigger"
+            defaultMessage="Trigger Error"
+          />
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item key="logout">
@@ -92,12 +101,12 @@ export default class GlobalHeaderRight extends PureComponent {
           <FormattedMessage id="menu.account.logout" defaultMessage="logout" />
         </Menu.Item>
       </Menu>
-    );
-    const noticeData = this.getNoticeData();
-    const unreadMsg = this.getUnreadData(noticeData);
-    let className = styles.right;
+    )
+    const noticeData = this.getNoticeData()
+    const unreadMsg = this.getUnreadData(noticeData)
+    let className = styles.right
     if (theme === 'dark') {
-      className = `${styles.right}  ${styles.dark}`;
+      className = `${styles.right}  ${styles.dark}`
     }
     return (
       <div className={className}>
@@ -110,10 +119,10 @@ export default class GlobalHeaderRight extends PureComponent {
             formatMessage({ id: 'component.globalHeader.search.example3' }),
           ]}
           onSearch={value => {
-            console.log('input', value); // eslint-disable-line
+            console.log('input', value) // eslint-disable-line
           }}
           onPressEnter={value => {
-            console.log('enter', value); // eslint-disable-line
+            console.log('enter', value) // eslint-disable-line
           }}
         />
         <Tooltip title={formatMessage({ id: 'component.globalHeader.help' })}>
@@ -130,15 +139,17 @@ export default class GlobalHeaderRight extends PureComponent {
           className={styles.action}
           count={currentUser.unreadCount}
           onItemClick={(item, tabProps) => {
-            console.log(item, tabProps); // eslint-disable-line
-            this.changeReadState(item, tabProps);
+            console.log(item, tabProps) // eslint-disable-line
+            this.changeReadState(item, tabProps)
           }}
           loading={fetchingNotices}
           locale={{
             emptyText: formatMessage({ id: 'component.noticeIcon.empty' }),
             clear: formatMessage({ id: 'component.noticeIcon.clear' }),
             viewMore: formatMessage({ id: 'component.noticeIcon.view-more' }),
-            notification: formatMessage({ id: 'component.globalHeader.notification' }),
+            notification: formatMessage({
+              id: 'component.globalHeader.notification',
+            }),
             message: formatMessage({ id: 'component.globalHeader.message' }),
             event: formatMessage({ id: 'component.globalHeader.event' }),
           }}
@@ -151,7 +162,9 @@ export default class GlobalHeaderRight extends PureComponent {
             count={unreadMsg.notification}
             list={noticeData.notification}
             title="notification"
-            emptyText={formatMessage({ id: 'component.globalHeader.notification.empty' })}
+            emptyText={formatMessage({
+              id: 'component.globalHeader.notification.empty',
+            })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg"
             showViewMore
           />
@@ -159,7 +172,9 @@ export default class GlobalHeaderRight extends PureComponent {
             count={unreadMsg.message}
             list={noticeData.message}
             title="message"
-            emptyText={formatMessage({ id: 'component.globalHeader.message.empty' })}
+            emptyText={formatMessage({
+              id: 'component.globalHeader.message.empty',
+            })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/sAuJeJzSKbUmHfBQRzmZ.svg"
             showViewMore
           />
@@ -167,7 +182,9 @@ export default class GlobalHeaderRight extends PureComponent {
             count={unreadMsg.event}
             list={noticeData.event}
             title="event"
-            emptyText={formatMessage({ id: 'component.globalHeader.event.empty' })}
+            emptyText={formatMessage({
+              id: 'component.globalHeader.event.empty',
+            })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/HsIsxMZiWKrNUavQUXqx.svg"
             showViewMore
           />
@@ -189,6 +206,6 @@ export default class GlobalHeaderRight extends PureComponent {
         )}
         <SelectLang className={styles.action} />
       </div>
-    );
+    )
   }
 }

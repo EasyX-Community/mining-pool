@@ -1,16 +1,16 @@
-import analysis from './en-US/analysis';
-import exception from './en-US/exception';
-import form from './en-US/form';
-import globalHeader from './en-US/globalHeader';
-import login from './en-US/login';
-import menu from './en-US/menu';
-import monitor from './en-US/monitor';
-import result from './en-US/result';
-import settingDrawer from './en-US/settingDrawer';
-import settings from './en-US/settings';
-import pwa from './en-US/pwa';
-import component from './en-US/component';
-import editor from './en-US/editor';
+import analysis from './en-US/analysis'
+import exception from './en-US/exception'
+import form from './en-US/form'
+import globalHeader from './en-US/globalHeader'
+import login from './en-US/login'
+import menu from './en-US/menu'
+import monitor from './en-US/monitor'
+import result from './en-US/result'
+import settingDrawer from './en-US/settingDrawer'
+import settings from './en-US/settings'
+import pwa from './en-US/pwa'
+import component from './en-US/component'
+import editor from './en-US/editor'
 
 export default {
   'navBar.lang': 'Languages',
@@ -34,4 +34,4 @@ export default {
   ...pwa,
   ...component,
   ...editor,
-};
+}

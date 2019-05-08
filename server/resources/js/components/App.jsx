@@ -86,30 +86,30 @@ export class App extends Component {
 
   render() {
     return (
-      <IntlProvider  locale='en'>
-      <CookiesProvider>
-        <BrowserRouter>
-          <ApolloProvider client={client} cache={cache}>
-            <AuthProvider>
-              <Global styles={global} />
-              <AuthConsumer>
-                {auth =>
-                  auth.isAuthenticated ? (
-                    <>
-                      <Layout>
-                        <Routes />
-                      </Layout>
-                      <ModalRoot />
-                    </>
-                  ) : (
-                    <AuthRoutes />
-                  )
-                }
-              </AuthConsumer>
-            </AuthProvider>
-          </ApolloProvider>
-        </BrowserRouter>
-      </CookiesProvider>
+      <IntlProvider locale="en">
+        <CookiesProvider>
+          <BrowserRouter>
+            <ApolloProvider client={client} cache={cache}>
+              <AuthProvider>
+                <Global styles={global} />
+                <AuthConsumer>
+                  {auth =>
+                    auth.isAuthenticated ? (
+                      <>
+                        <Layout>
+                          <Routes />
+                        </Layout>
+                        <ModalRoot />
+                      </>
+                    ) : (
+                      <AuthRoutes />
+                    )
+                  }
+                </AuthConsumer>
+              </AuthProvider>
+            </ApolloProvider>
+          </BrowserRouter>
+        </CookiesProvider>
       </IntlProvider>
     )
   }

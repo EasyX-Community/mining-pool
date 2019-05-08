@@ -25,7 +25,8 @@ export default {
   'validation.userName.required': '請輸入賬戶!',
   'validation.password.required': '請輸入密碼！',
   'validation.password.twice': '兩次輸入的密碼不匹配!',
-  'validation.password.strength.msg': '請至少輸入 6 個字符。請不要使用容易被猜到的密碼。',
+  'validation.password.strength.msg':
+    '請至少輸入 6 個字符。請不要使用容易被猜到的密碼。',
   'validation.password.strength.strong': '強度：強',
   'validation.password.strength.medium': '強度：中',
   'validation.password.strength.short': '強度：太短',
@@ -37,4 +38,4 @@ export default {
   'validation.date.required': '請選擇起止日期',
   'validation.goal.required': '請輸入目標描述',
   'validation.standard.required': '請輸入衡量標淮',
-};
+}
