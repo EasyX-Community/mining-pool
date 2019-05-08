@@ -17,6 +17,7 @@ import { BrowserRouter } from 'react-router-dom'
 import Layout from '@layout'
 import { CookiesProvider, withCookies } from 'react-cookie'
 import AuthProvider, { AuthConsumer, AuthRoutes } from '@auth'
+import { IntlProvider } from 'react-intl'
 
 const cache = new InMemoryCache()
 
@@ -85,6 +86,7 @@ export class App extends Component {
 
   render() {
     return (
+      <IntlProvider  locale='en'>
       <CookiesProvider>
         <BrowserRouter>
           <ApolloProvider client={client} cache={cache}>
@@ -108,6 +110,7 @@ export class App extends Component {
           </ApolloProvider>
         </BrowserRouter>
       </CookiesProvider>
+      </IntlProvider>
     )
   }
 }
