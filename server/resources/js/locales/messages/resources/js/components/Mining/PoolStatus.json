@@ -1,0 +1,22 @@
+[
+  {
+    "id": "algorithm",
+    "defaultMessage": "Algorithm"
+  },
+  {
+    "id": "port",
+    "defaultMessage": "Port"
+  },
+  {
+    "id": "coin",
+    "defaultMessage": "Coin"
+  },
+  {
+    "id": "miner",
+    "defaultMessage": "Miner"
+  },
+  {
+    "id": "hashrate",
+    "defaultMessage": "Hashrate"
+  }
+]

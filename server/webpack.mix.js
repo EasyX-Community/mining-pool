@@ -17,7 +17,10 @@ mix.react('resources/js/app.js', 'public/js')
       "plugins": [
          ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": "css" }],
          "@babel/plugin-proposal-class-properties",
-         "@babel/plugin-syntax-dynamic-import"
+         "@babel/plugin-syntax-dynamic-import",
+         ["react-intl", {
+            "messagesDir": "resources/js/locales/messages/"
+        }]
       ],
       "env": {
          "production": {
@@ -39,6 +42,7 @@ mix.react('resources/js/app.js', 'public/js')
           '@content': __dirname + '/resources/content',
           '@graphql': __dirname + '/resources/graphql',
           '@helpers': __dirname + '/resources/js/helpers',
+          '@locales': __dirname + '/resources/js/locales',
           '@mining': __dirname + '/resources/js/components/Mining',
           '@modals': __dirname + '/resources/js/components/Modals',
           '@pages': __dirname + '/resources/js/components/Pages',

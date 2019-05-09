@@ -8,6 +8,7 @@
         "format": "prettier --single-quote --trailing-comma --tab-width 2 es5 --print-width 80 --no-semi --write '{resources/js,resources/sass}/**/*.?(js|jsx|scss)'",
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
         "prod": "npm run production",
+        "manage:translations": "node ./resources/js/locales/translationRunner.js",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "husky": {
@@ -33,6 +34,8 @@
         "prop-types": "^15.7.2",
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
+        "react-intl-cra": "^0.3.4",
+        "react-intl-translations-manager": "^5.0.3",
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.15.2",
         "sass-loader": "^7.1.0"
@@ -48,6 +51,7 @@
         "apollo-link-http": "^1.5.14",
         "babel-plugin-emotion": "^10.0.9",
         "babel-plugin-import": "^1.11.0",
+        "babel-plugin-react-intl": "^3.0.1",
         "formik": "^1.5.4",
         "graphql": "^14.2.1",
         "graphql-tag": "^2.10.1",
@@ -56,6 +60,7 @@
         "react-apollo": "^2.5.5",
         "react-cookie": "^3.1.2",
         "react-icons": "^3.6.1",
+        "react-intl": "^2.8.0",
         "react-markdown": "^4.0.8",
         "react-router": "^5.0.0",
         "react-router-dom": "^5.0.0",

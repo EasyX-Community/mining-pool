@@ -17,7 +17,19 @@ import { BrowserRouter } from 'react-router-dom'
 import Layout from '@layout'
 import { CookiesProvider, withCookies } from 'react-cookie'
 import AuthProvider, { AuthConsumer, AuthRoutes } from '@auth'
-import { IntlProvider } from 'react-intl'
+import { IntlProvider, defineMessages, injectIntl } from 'react-intl'
+import { addAppLocaleData, LocaleProvider, LocaleConsumer } from '@locales'
+
+const messages = defineMessages({
+  title: {
+    id: 'app.title',
+    defaultMessage: 'HelixAlpha Mining Pool - English',
+  },
+  description: {
+    id: 'app.description',
+    defaultMessage: 'None',
+  },
+})
 
 const cache = new InMemoryCache()
 
@@ -82,44 +94,61 @@ export class App extends Component {
     })
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    addAppLocaleData()
+    const {
+      intl: { formatMessage },
+    } = this.props
+    document.title = formatMessage(messages.title)
+
+  }
 
   render() {
     return (
-      <IntlProvider locale="en">
-        <CookiesProvider>
-          <BrowserRouter>
-            <ApolloProvider client={client} cache={cache}>
-              <AuthProvider>
-                <Global styles={global} />
-                <AuthConsumer>
-                  {auth =>
-                    auth.isAuthenticated ? (
-                      <>
-                        <Layout>
-                          <Routes />
-                        </Layout>
-                        <ModalRoot />
-                      </>
-                    ) : (
-                      <AuthRoutes />
-                    )
-                  }
-                </AuthConsumer>
-              </AuthProvider>
-            </ApolloProvider>
-          </BrowserRouter>
-        </CookiesProvider>
-      </IntlProvider>
+      <CookiesProvider>
+        <BrowserRouter>
+          <ApolloProvider client={client} cache={cache}>
+            <AuthProvider>
+              <Global styles={global} />
+              <AuthConsumer>
+                {auth =>
+                  auth.isAuthenticated ? (
+                    <>
+                      <Layout>
+                        <Routes />
+                      </Layout>
+                      <ModalRoot />
+                    </>
+                  ) : (
+                    <AuthRoutes />
+                  )
+                }
+              </AuthConsumer>
+            </AuthProvider>
+          </ApolloProvider>
+        </BrowserRouter>
+      </CookiesProvider>
     )
   }
 }
 
 export const BaseApp = compose(
   withModalProvider,
-  withLayoutProvider
+  withLayoutProvider,
+  injectIntl
 )(App)
 
 if (document.getElementById('root')) {
-  ReactDOM.render(<BaseApp />, document.getElementById('root'))
+  ReactDOM.render(
+    <LocaleProvider>
+      <LocaleConsumer>
+        {({ locale, messages }) => (
+          <IntlProvider locale={locale} messages={messages}>
+            <BaseApp />
+          </IntlProvider>
+        )}
+      </LocaleConsumer>
+    </LocaleProvider>,
+    document.getElementById('root')
+  )
 }

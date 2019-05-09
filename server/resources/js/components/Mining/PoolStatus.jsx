@@ -2,39 +2,66 @@ import React from 'react'
 import { Table } from 'antd'
 import { Query } from 'react-apollo'
 import GET_ALGORITHMS from '@graphql/Algorithms.graphql'
+import { injectIntl, defineMessages } from 'react-intl'
 
-const columns = [
+const message = defineMessages({
+  algorithm: {
+    id: 'algorithm',
+    defaultMessage: 'Algorithm',
+  },
+  port: {
+    id: 'port',
+    defaultMessage: 'Port',
+  },
+  coin: {
+    id: 'coin',
+    defaultMessage: 'Coin',
+  },
+  miner: {
+    id: 'miner',
+    defaultMessage: 'Miner',
+  },
+  hashrate: {
+    id: 'hashrate',
+    defaultMessage: 'Hashrate',
+  },
+})
+
+const columns = (formatMessage) => {
+  
+  return [
   {
-    title: 'Algorithm',
+    title: formatMessage(message.algorithm),
     dataIndex: 'name',
     key: 'name',
     sorter: (a, b) => a.name.localeCompare(b.name),
   },
   {
-    title: 'Port',
+    title: formatMessage(message.port),
     dataIndex: 'port',
     key: 'port',
     sorter: (a, b) => a.port - b.port,
   },
   {
-    title: 'Coins',
+    title: formatMessage(message.coin),
     dataIndex: 'coins',
     key: 'coins',
     sorter: (a, b) => a.cions - b.coins,
   },
   {
-    title: 'Miners',
+    title: formatMessage(message.miner),
     dataIndex: 'miners',
     key: 'miners',
     sorter: (a, b) => a.miners - b.miners,
   },
   {
-    title: 'Hashrate',
+    title: formatMessage(message.hashrate),
     dataIndex: 'hashrates',
     key: 'hashrates',
     sorter: (a, b) => a.hashrates - b.hashrates,
   },
 ]
+}
 
 function onChange(pagination, filters, sorter) {
   console.log('params', pagination, filters, sorter)
@@ -63,6 +90,7 @@ class PoolStatus extends React.Component {
   }
 
   render() {
+    const { intl: { formatMessage } } = this.props
     return (
       <Query
         query={GET_ALGORITHMS}
@@ -79,7 +107,7 @@ class PoolStatus extends React.Component {
           return (
             <React.Fragment>
               <Table
-                columns={columns}
+                columns={columns(formatMessage)}
                 onChange={onChange}
                 dataSource={algorithms}
                 loading={loading}
@@ -104,4 +132,4 @@ class PoolStatus extends React.Component {
   }
 }
 
-export default PoolStatus
+export default injectIntl(PoolStatus)
